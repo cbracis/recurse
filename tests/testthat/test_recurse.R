@@ -39,8 +39,9 @@ test_that("distance matrix",
 test_that("time in radius",
 		  {
 		  	# examine visits to point at x=2 (use first time at t=3)
-		  	expect_equal(getRecursions(gridTrack, 1)$revisitStats[coordIdx==3, "timeInside"],
+		  	stats = getRecursions(gridTrack, 1)$revisitStats
+		  	expect_equal(stats[stats$coordIdx==3, "timeInside"],
 		  				 c(2, 3, 2))
-		  	expect_equal(getRecursions(gridTrack, 1)$revisitStats[coordIdx==3, "timeSinceLastVisit"],
+		  	expect_equal(stats[stats$coordIdx==3, "timeSinceLastVisit"],
 		  				 c(NA, 2, 3))
 		  	})

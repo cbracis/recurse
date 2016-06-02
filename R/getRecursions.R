@@ -26,7 +26,7 @@ getRecursions = function(xyt, radius)
 	stopifnot(radius > 0)
 	
 	n = nrow(xyt) # number of data points
-	z = complex(re = xyt[,1], im = xyt[,3])
+	z = complex(re = xyt[,1], im = xyt[,2])
 	t = xyt[,3]
 	
 	getDists <- function(a, b)		
