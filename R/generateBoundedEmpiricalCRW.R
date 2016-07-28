@@ -1,7 +1,8 @@
 generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, boundry)
-{
-	
+{	
 	require(prevR)
+	stopifnot(length(steps) == length(turnAngles))
+	nSteps = length(steps)
 	
 	X = vector("numeric", n)
 	Y = vector("numeric", n)
@@ -15,11 +16,12 @@ generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, bou
 		tries = 0
 		repeat
 		{
-			# draw steps
-			step <- sample(steps, 1, replace = TRUE)
+			# draw random index
+			idx <- sample(1:nSteps, 1, replace = TRUE)
 			
-			# draw turning angles
-			theta <- sample(turnAngles, 1, replace = TRUE)
+			# draw step and turning angle
+			step <- steps[idx]
+			theta <- turnAngles[idx]
 			
 			# cumulative angle (absolute orientation)
 			Phi <- Phi + theta
