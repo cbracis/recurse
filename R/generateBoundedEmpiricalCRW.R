@@ -1,6 +1,23 @@
+#' @title Generates a bounded correlated random walk from an empirical set of steps and angles
+#' 
+#' @description Generates a correlated random walk starting at (startX, startY) using pairs of steps and 
+#' turning angles drawn from the provided empirical distributions. The random walk is bounded by a polygon by 
+#' testing if each step will end outside the polygon and redrawing a new step if necessary.
+#' 
+#' @inheritParams generateEmpiricalCRW
+#' @param boundry a \link[sp]{SpatialPolygon} describing the boundary of the walk
+#' 
+#' @return a data frame of the generated random walk with columns x and y describing the location 
+#' and t for the time of each step
+#' 
+#' @export
+#' 
 generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, boundry)
 {	
-	require(prevR)
+	if (!requireNamespace("pkg", quietly = TRUE)) {
+		stop("Pkg needed for this function to work. Please install it.",
+			 call. = FALSE)
+	}	
 	stopifnot(length(steps) == length(turnAngles))
 	nSteps = length(steps)
 	
@@ -34,7 +51,7 @@ generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, bou
 			x <- X[i-1] + dX
 			y <- Y[i-1] + dY
 			
-			if (point.in.SpatialPolygons(x, y, boundry))
+			if (prevR::point.in.SpatialPolygons(x, y, boundry))
 			{
 				# point is inside boundry 
 				X[i] = x
