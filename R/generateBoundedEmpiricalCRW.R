@@ -5,7 +5,7 @@
 #' testing if each step will end outside the polygon and redrawing a new step if necessary.
 #' 
 #' @inheritParams generateEmpiricalCRW
-#' @param boundry a \link[sp]{SpatialPolygon} describing the boundary of the walk
+#' @param boundry a \link[sp]{SpatialPolygons} describing the boundary of the walk
 #' 
 #' @return a data frame of the generated random walk with columns x and y describing the location 
 #' and t for the time of each step
@@ -14,8 +14,9 @@
 #' 
 generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, boundry)
 {	
-	if (!requireNamespace("pkg", quietly = TRUE)) {
-		stop("Pkg needed for this function to work. Please install it.",
+	if (!requireNamespace("prevR", quietly = TRUE)) 
+	{
+		stop("prevR package needed for this function to work. Please install it.",
 			 call. = FALSE)
 	}	
 	stopifnot(length(steps) == length(turnAngles))

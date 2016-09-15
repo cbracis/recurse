@@ -1,3 +1,19 @@
+#' @title Generates a correlated random walk from an empirical set of steps and angles
+#' 
+#' @description Generates a correlated random walk starting at (startX, startY) using pairs of steps and 
+#' turning angles drawn from the provided empirical distributions.
+#' 
+#' @param n number of steps to generate
+#' @param startX starting x-coordiante for the walk
+#' @param startY starting y-coordinate for the walk
+#' @param steps vector of steps to draw from
+#' @param turnAngles vector of turning angles to draw from
+#' 
+#' @return a data frame of the generated random walk with columns x and y describing the location 
+#' and t for the time of each step
+#' 
+#' @export
+#' 
 generateEmpiricalCRW = function(n, startX, startY, steps, turnAngles)
 {
 	stopifnot(length(steps) == length(turnAngles))

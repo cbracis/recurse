@@ -3,12 +3,12 @@
 #' @description Calculates the percentage of a segment that lies within a circle for a point
 #' A inside the circle and point B outside the circle for a circle with center C and radius R.
 #' 
-calculateCrossingPercentageCmplx = function(Cz, Az, Bz, R)
+.calculateCrossingPercentageCmplx = function(Cz, Az, Bz, R)
 {
-	return(calculateCrossingPercentage(Re(Cz), Im(Cz), Re(Az), Im(Az), Re(Bz), Im(Bz), R))
+	return(.calculateCrossingPercentage(Re(Cz), Im(Cz), Re(Az), Im(Az), Re(Bz), Im(Bz), R))
 }
 
-calculateCrossingPercentage = function(Cx, Cy, Ax, Ay, Bx, By, R)
+.calculateCrossingPercentage = function(Cx, Cy, Ax, Ay, Bx, By, R)
 {
 	# algorithm based on 
 	# http://stackoverflow.com/questions/1073336/circle-line-segment-collision-detection-algorithm

@@ -1,13 +1,13 @@
 Package: recurse
 Type: Package
-Title: What the package does (short line)
+Title: Computes revisitation metrics for trajectory data
 Version: 1.0
 Date: 2016-03-23
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Chloe Bracis <cbracis@uw.edu>
+Maintainer: Chloe Bracis <cbracis@uw.edu>
+Description: Computes revisitation metrics for trajectory data, such as the number of revisitations for each location as well as the time spent for that visit and the time since the previous visit. Also includes functions to plot data and generate correlated random walks.
+License: MIT + file LICENSE
 Suggests:
-    testthat, circular
+    testthat, circular, prevR
 LazyData: true
 RoxygenNote: 5.0.1

@@ -13,6 +13,7 @@
 #' @param lwd line width
 #' @return invisibly, the x and y points of the drawn circle
 #' 
+#' @export
 drawCircle= function (x, y, radius, nv = 100, border = NULL, col = NA, lty = 1, lwd = 1) 
 {
 	# based on draw.circle() from plotrix, but draw oval for non 1-1 aspect ratio 

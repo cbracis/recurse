@@ -21,12 +21,12 @@ randomComparisons = function(n, mean, sd)
 		# determine if A or B is closer to circle center C
 		if (LAC < LBC)
 		{
-			method1 = calculateCrossingPercentage(Cx, Cy, Ax, Ay, Bx, By, r)
-			method2 = calculateCrossingPercentage2(Cx, Cy, Ax, Ay, Bx, By, r)
+			method1 = .calculateCrossingPercentage(Cx, Cy, Ax, Ay, Bx, By, r)
+			method2 = .calculateCrossingPercentage2(Cx, Cy, Ax, Ay, Bx, By, r)
 		} else
 		{
-			method1 = calculateCrossingPercentage(Cx, Cy, Bx, By, Ax, Ay, r)
-			method2 = calculateCrossingPercentage2(Cx, Cy, Bx, By, Ax, Ay, r)
+			method1 = .calculateCrossingPercentage(Cx, Cy, Bx, By, Ax, Ay, r)
+			method2 = .calculateCrossingPercentage2(Cx, Cy, Bx, By, Ax, Ay, r)
 		}
 		expect_equal(method1, method2, info = cat("C=(", Cx, "'", Cy, "), pts ", 
 												  "(", Ax, "'", Ay, ") (", Bx, "'", By, "), r=", r))
@@ -40,6 +40,6 @@ test_that("compare crossing to alternate implementation",
 
 test_that("point tangent",
 		  {
-		  	expect_equal(calculateCrossingPercentage(1, 1, 1, 2, 2, 3, 1), 0)
-		  	expect_equal(calculateCrossingPercentage(1, 1, 0.5, 0.5, 1, 2, 1), 1)
+		  	expect_equal(.calculateCrossingPercentage(1, 1, 1, 2, 2, 3, 1), 0)
+		  	expect_equal(.calculateCrossingPercentage(1, 1, 0.5, 0.5, 1, 2, 1), 1)
 		  })

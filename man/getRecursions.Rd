@@ -4,13 +4,16 @@
 \alias{getRecursions}
 \title{Calculates recursion information from the trajectory}
 \usage{
-getRecursions(xyt, radius)
+getRecursions(xyt, radius, units = c("hours", "secs", "mins", "days"))
 }
 \arguments{
-\item{xyt}{the trajectory data with three columns, x the x-coordinate, 
-y the y-cordinate, and t the time}
+\item{xyt}{data.frame. the trajectory data with three columns, x the x-coordinate, 
+y the y-cordinate, and t the datetime.}
 
-\item{radius}{radius to use in units of the location data to detect recursions}
+\item{radius}{numeric. radius to use in units of the location data to detect recursions.}
+
+\item{units}{character string specifying units to calculate time differences in for the time spans inside the radius and since the 
+visit in \code{revisitStats}. Defaults to hours.}
 }
 \value{
 A list with several components. First, \code{revisits} is a vector of the same length as the xyt 
@@ -22,12 +25,19 @@ of the point of the track at the center of the radius, the radius entrace and ex
 visit, how much time was spent inside the radius, and how long since the last visit (NA for the first visit).
 }
 \description{
+A circle of radius R is drawn around each point in the trajectory. The number of
+revists is calculated as the number of segments of the trajectory passing through that circle.
+}
+\details{
 For each point in the trajectory, a circle of radius R is drawn around that point.
 Then the number of segments of the trajectory passing through that circle is counted, this is
-the number of revisits, so each point will have at least one revisit (the initial visit), For 
-each revist, the time spent inside the circle is calculated, as well as the time since the last 
+the number of revisits, so each point will have at least one revisit (the initial visit). For each 
+revist, the time spent inside the circle is calculated, as well as the time since the last 
 visit (NA for the first visit). In order to calculate the time values, the crossing time of the
 radius is calucluated by assuming linear movement at a constant speed between the points inside
 and outside the circle.
+
+\strong{Projection.} Consider the projection used. Since segments are counted passing through circles
+drawn around points, an equal area projection would ensure similar size comparisons.
 }
 

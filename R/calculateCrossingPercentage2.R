@@ -10,7 +10,9 @@
 #' @param xOut x-coordinate of point outside circle
 #' @param yOut y-coordinate of point outside circle
 #' @param radius radius of circle
-calculateCrossingPercentage2 = function(xi, yi, x1, y1, x2, y2, r)
+#' 
+#' @details Alternate algorithm to calculate a line intersection a circle
+.calculateCrossingPercentage2 = function(xi, yi, x1, y1, x2, y2, r)
 {
 		d = sqrt((x2-x1)^2 + (y2-y1)^2)
 		a = atan2(y2-y1, x2-x1)
