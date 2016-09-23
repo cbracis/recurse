@@ -4,16 +4,20 @@
 \alias{plot.recurse}
 \title{Calculates recursion information from the trajectory}
 \usage{
-\method{plot}{recurse}(x, xyt, col, ...)
+\method{plot}{recurse}(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 }
 \arguments{
 \item{x}{\code{recurse} object returned from call to \link{getRecursions}}
 
 \item{xyt}{data.frame of x, y, and t representing the xy-coordinates and the time (same as call to \link{getRecursions})}
 
+\item{...}{additional arguments to \link{plot}}
+
 \item{col}{optional vector of colors as long as the maximum number of revisits to color code trajectory points}
 
-\item{...}{additional arguments to \link{plot}}
+\item{alpha}{optional alpha value for color transparency between 0 and 1}
+
+\item{legendPos}{a vector of length 2 with the x and y coordinate of the center of the legend in user coordinates}
 }
 \value{
 the plot
