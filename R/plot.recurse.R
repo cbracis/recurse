@@ -22,16 +22,30 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 	
 	getContinuousPalette = function(n)
 	{
+		if (!requireNamespace("scales", quietly = TRUE)) 
+		{
+			stop("scales package needed for this function to work. Please install it.",
+				 call. = FALSE)
+		}
+		
 		cols = scales::brewer_pal(palette = "RdYlBu", direction = -1)(8)[3:8] # drop darker blue colors
 		return( scales::gradient_n_pal(cols)(seq(0, 1, length = n)) )
 	}
-	if (!hasArg(col))
+	
+	if (!methods::hasArg(col))
 	{
-		col = getContinuousPalette(max(x$revisits))
+		if (!requireNamespace("scales", quietly = TRUE))
+		{
+			col = getContinuousPalette(max(x$revisits))
+		}
+		else
+		{
+			col = rev(grDevices::heat.colors(max(x$revisits)))
+		}
 	}
 	
 	revOder = order(x$revisits)
-	plot(xyt[revOder,1], xyt[revOder,2], xlab = "x", ylab = "y", asp = 1, 
+	graphics::plot(xyt[revOder,1], xyt[revOder,2], xlab = "x", ylab = "y", asp = 1, 
 		 col = scales::alpha(col, alpha)[sort(x$revisits)], ...)
 	
 	if(!is.null(legendPos))
@@ -48,9 +62,9 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 		}
 		
 		fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=1:max(x$revisits))
-		ucord = par()$usr
+		ucord = graphics::par()$usr
 		xdelta = (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
-		text(x = c(legendPos[1] - xdelta, legendPos[1] + xdelta), y = rep(legendPos[2], 2),
+		graphics::text(x = c(legendPos[1] - xdelta, legendPos[1] + xdelta), y = rep(legendPos[2], 2),
 			 labels = c(1, max(x$revisits)), pos = 1, offset = 1)
 	}
 	

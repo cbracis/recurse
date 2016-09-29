@@ -47,7 +47,7 @@ test_that("correct number of revisits",
 
 test_that("distance matrix",
 		  {
-		  	expect_equal(getRecursions(simplePts, 1)$dists, simplePtsDist)
+		  	expect_equal(getRecursions(simplePts, 1, verbose = TRUE)$dists, simplePtsDist)
 		  })
 
 test_that("time in radius",

@@ -25,7 +25,7 @@ generateCRW = function(n, weibull_shape = 2, weibull_scale = 1, cauchy_mu = 0, c
 	}	
 	
 	# make weibull distributed steps
-	steps <- rweibull(n, weibull_shape, weibull_scale)
+	steps <- stats::rweibull(n, weibull_shape, weibull_scale)
 	
 	# make clustered turning angles
 	theta <- circular::rwrappedcauchy(n, cauchy_mu, cauchy_rho)

@@ -26,7 +26,7 @@ drawCircle= function (x, y, radius, nv = 100, border = NULL, col = NA, lty = 1, 
 	for (circle in 1:length(radius)) {
 		xv <- cos(angles) * radius[circle] + x
 		yv <- sin(angles) * radius[circle] + y
-		polygon(xv, yv, border = border, col = col[circle], lty = lty, lwd = lwd)
+		graphics::polygon(xv, yv, border = border, col = col[circle], lty = lty, lwd = lwd)
 	}
 	invisible(list(x = xv, y = yv))
 }

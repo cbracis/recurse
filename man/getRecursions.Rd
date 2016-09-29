@@ -4,7 +4,8 @@
 \alias{getRecursions}
 \title{Calculates recursion information from the trajectory}
 \usage{
-getRecursions(xyt, radius, units = c("hours", "secs", "mins", "days"))
+getRecursions(xyt, radius, threshold = 0, timeunits = c("hours", "secs",
+  "mins", "days"), verbose = TRUE)
 }
 \arguments{
 \item{xyt}{data.frame. the trajectory data with three columns, x the x-coordinate, 
@@ -12,13 +13,22 @@ y the y-cordinate, and t the datetime.}
 
 \item{radius}{numeric. radius to use in units of the location data to detect recursions.}
 
-\item{units}{character string specifying units to calculate time differences in for the time spans inside the radius and since the 
+\item{threshold}{a time diference (in units \code{timeunits}) to ignore excursions outside the radius.}
+
+\item{timeunits}{character string specifying units to calculate time differences in for the time spans inside the radius and since the 
 visit in \code{revisitStats}. Defaults to hours.}
+
+\item{verbose}{\code{TRUE} to output complete information (can be large for large input data frames) or 
+\code{FALSE} to output basic information.}
 }
 \value{
-A list with several components. First, \code{revisits} is a vector of the same length as the xyt 
-dataframe that gives the number of revisits for each location, where 1 means that there were 
-no revisits, only the initial visit. Next, \code{dists} gives the distance matrix between
+A list with several components. \code{revisits}, \code{firstPassageTime}, \code{residenceTime}
+are vectors of the same length as the xyt dataframe. \code{revisits} is the number of revisits for each 
+location, where 1 means that there were 
+no revisits, only the initial visit. \code{firstPassageTime} is the first passage time for the visit 
+through the focal coordinate. \code{residenceTime} is the total time spent withing the radius. \code{radius}
+is the spcified radius used for all the calculations. When \code{verbose = TRUE}, additional inforamtion 
+is also returned, \code{dists} and \code{revisitStats}.Next, \code{dists} gives the distance matrix between
 all ocations. Finally, \code{revisitStats} gives further statistics on each visit. These are calculated 
 per location (i.e., no aggregation of nearby points is performed), and give the index and location
 of the point of the track at the center of the radius, the radius entrace and exit time of the track for that 
