@@ -32,6 +32,8 @@ generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, bou
 	for (i in 2:n)
 	{
 		tries = 0
+		violateBoundary = FALSE
+		
 		repeat
 		{
 			# draw random index
@@ -59,14 +61,16 @@ generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, bou
 				Y[i] = y
 				break
 			}
-			if (tries > 10)
+			if (tries > 50)
 			{
 				print(paste("next point outside boundary, i =", i,  "(", X[i-1], Y[i-1], ")"))
+				violateBoundary = TRUE
 				break
 			}
 			tries = tries + 1
 		} 
 	}
 	
-	return( data.frame(x = X, y = Y, t = 1:n))
+	results = if (violateBoundary) { NULL } else { data.frame(x = X, y = Y, t = 1:n) }
+	return( results )
 }

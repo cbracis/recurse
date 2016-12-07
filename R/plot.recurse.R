@@ -14,12 +14,6 @@
 #' 
 plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 {
-	if (!requireNamespace("scales", quietly = TRUE)) 
-	{
-		stop("scales package needed for this function to work. Please install it.",
-			 call. = FALSE)
-	}	
-	
 	getContinuousPalette = function(n)
 	{
 		if (!requireNamespace("scales", quietly = TRUE)) 
@@ -34,7 +28,7 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 	
 	if (!methods::hasArg(col))
 	{
-		if (!requireNamespace("scales", quietly = TRUE))
+		if (requireNamespace("scales", quietly = TRUE))
 		{
 			col = getContinuousPalette(max(x$revisits))
 		}
@@ -42,6 +36,11 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 		{
 			col = rev(grDevices::heat.colors(max(x$revisits)))
 		}
+	}
+	
+	if (inherits(xyt, "Move") & requireNamespace("move", quietly = TRUE))
+	{
+		xyt = data.frame(xyt@coords, t = xyt@timestamps)
 	}
 	
 	revOder = order(x$revisits)
