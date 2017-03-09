@@ -20,7 +20,7 @@ getRecursions.Move = function(x, radius, threshold = 0, timeunits = c("hours", "
 	
 	if (length(id) == 0) # can be for some move objects (ie split from movestack?)
 	{
-		id = habiba@idData$individual.local.identifier
+		id = x@idData$individual.local.identifier
 	}
 
 	xyt = data.frame(x@coords, t = x@timestamps, id = id)

@@ -61,14 +61,26 @@ generateBoundedEmpiricalCRW = function(n, startX, startY, steps, turnAngles, bou
 				Y[i] = y
 				break
 			}
-			if (tries > 50)
+			if (tries > 100)
 			{
-				print(paste("next point outside boundary, i =", i,  "(", X[i-1], Y[i-1], ")"))
+				print(paste("i =", i, "next point (", x, y, "), outside boundary, current (", X[i-1], Y[i-1], ")"))
 				violateBoundary = TRUE
 				break
 			}
 			tries = tries + 1
 		} 
+		
+		if (violateBoundary)
+		{
+			# write track
+			write.table(data.frame(x = X, y = Y, t = 1:n), "boundryProblem.csv", 
+						sep = ",", append = TRUE, row.names = FALSE, quote = FALSE,
+						col.names = FALSE)
+			
+			
+			# stop for loop if boundary violated
+			break
+		}
 	}
 	
 	results = if (violateBoundary) { NULL } else { data.frame(x = X, y = Y, t = 1:n) }
