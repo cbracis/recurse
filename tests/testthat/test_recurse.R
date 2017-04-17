@@ -34,9 +34,15 @@ simplePts = data.frame(x = 1, y = 1:5, t = createTimeVector(5), id = "A1")
 simplePtsDist = matrix(0, nrow = 5, ncol = 5)
 simplePtsDist =  abs(row(simplePtsDist) - col(simplePtsDist))
 
+# different locations than simplePts, but still x = 1 so with easy distances
+simpleLocs = data.frame(x = c(1, 1, 1), y = c(1, 0, 10))
+simpleLocsDist = matrix(0, nrow = 5, ncol = 3)
+simpleLocsDist = cbind(0:4, 1:5, 9:5)
+
 # two tracks, one vertical x = 1, one horizontal y = 3
 horzTrack = data.frame(x = -1:3, y = 3, t = createTimeVector(5), id = "B2")
 twoTracks = rbind(simplePts, horzTrack)
+
 
 # track with data points on radius boundries so time in/out is easy to caluculate
 gridTrack = data.frame(
@@ -62,6 +68,7 @@ test_that("correct number of revisits",
 test_that("distance matrix",
 		  {
 		  	expect_equal(getRecursions(simplePts, 1, verbose = TRUE)$dists, simplePtsDist)
+		  	expect_equal(getRecursionsAtLocations(simplePts, simpleLocs, 1, verbose = TRUE)$dists, simpleLocsDist)
 		  })
 
 test_that("time in radius",
@@ -93,22 +100,23 @@ test_that("revisit stats",
 		  	expect_equal(stats$visitIdx, rep(1, n))
 		  	expect_equal(stats$entranceTime, c(simplePts$t[1], simplePts$t[2:n] - as.difftime(30, units = "mins")))
 		  	expect_equal(stats$exitTime, c(simplePts$t[1:(n-1)] + as.difftime(30, units = "mins"), simplePts$t[n]))
-		  	expect_equal(stats$timeInside, as.difftime(c(0.5, 1, 1, 1, 0.5), units = "hours"))
-		  	expect_equal(stats$timeSinceLastVisit, as.difftime(c(1, rep(NA, n)), units = "hours")[-1])
+		  	expect_equal(stats$timeInside, c(0.5, 1, 1, 1, 0.5))
+		  	expect_equal(stats$timeSinceLastVisit, c(1, rep(NA, n))[-1])
 		  	
 		  	
 		  	stats2 = getRecursions(twoTracks, 0.5)$revisitStats
 		  	expectedCoordIdx = c(1, 2, 3, 3, 4, 5, 6, 7, 8, 8, 9, 10)
+		  	expectedIdIdx = c(1, 1, 1, 2, 1, 1, 2, 2, 1, 2, 2, 2)
 		  	
-		  	expect_equal(stats2$id, twoTracks$id[expectedCoordIdx])
+		  	expect_equal(stats2$id, unique(twoTracks$id)[expectedIdIdx]) #unique orders A1 B2
 		  	expect_equal(stats2$x, twoTracks$x[expectedCoordIdx])
 		  	expect_equal(stats2$y, twoTracks$y[expectedCoordIdx])
 		  	expect_equal(stats2$coordIdx, expectedCoordIdx)
 		  	expect_equal(stats2$visitIdx, rep(c(1, 1, 1, 2, 1, 1), 2))
 		  	expect_equal(stats2$entranceTime, twoTracks$t[expectedCoordIdx] - as.difftime(rep(c(0, rep(30, 5)), 2), units = "mins"))
 		  	expect_equal(stats2$exitTime, twoTracks$t[expectedCoordIdx] + as.difftime(rep(c(rep(30, 5), 0), 2), units = "mins"))
-		  	expect_equal(stats2$timeInside, as.difftime(rep(c(0.5, 1, 1, 1, 1, 0.5), 2), units = "hours"))
-		  	expect_equal(stats2$timeSinceLastVisit, as.difftime(c(1, rep(NA, length(expectedCoordIdx))), units = "hours")[-1]) 
+		  	expect_equal(stats2$timeInside, rep(c(0.5, 1, 1, 1, 1, 0.5), 2))
+		  	expect_equal(stats2$timeSinceLastVisit, c(1, rep(NA, length(expectedCoordIdx)))[-1]) 
 		  	
 		  })
 

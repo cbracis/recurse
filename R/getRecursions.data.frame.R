@@ -13,6 +13,11 @@ getRecursions.data.frame = function(x, radius, threshold = 0, timeunits = c("hou
 	stopifnot(radius > 0)
 	timeunits = match.arg(timeunits)
 	
-	return( .getRecursions(x, x[,1:2], radius, threshold, timeunits, verbose) )
+	results = getRecursionsCpp(x[,1], x[,2], x[,3], x[,4], x[,1], x[,2], 
+							   radius, threshold, timeunits, verbose)
+	
+	return(results)
+	
+#	return( .getRecursions(x, x[,1:2], radius, threshold, timeunits, verbose) )
 }
 

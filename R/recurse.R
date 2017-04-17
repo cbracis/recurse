@@ -16,6 +16,8 @@
 #' 
 #' @name recurse
 #' @docType package
+#'@importFrom Rcpp evalCpp
+#'@useDynLib recurse
 NULL
 
 #' Sample trajectory.

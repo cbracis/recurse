@@ -70,21 +70,21 @@
 						else
 						{
 							revisits[i] = revisits[i] + 1
-							stats = data.frame(trajectory[i, idIdx], Re(z[i]), Im(z[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
+							stats = data.frame(trajectory[j-1, idIdx], Re(loc[i]), Im(loc[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
 											   timeInside, timeSinceLastVisit)
 							names(stats) = statsColNames
 							revisitStats = rbind(revisitStats,  stats)	
 						}
 					}
-				} # end if new track
+				} # end i
 				
-				# reset varaibles for new trajectory
+				# reset variables for new trajectory
 				stillInside = ifelse(inRadius[j], TRUE, FALSE) # start with animal inside radius?
 				appendToPreviousRevisit = FALSE
 				radiusEntranceTime = if (stillInside) { t[j] } else { NA } # avoid ifelse which converts posix to numeric
 				radiusExitTime = NA
 				timeSinceLastVisit = NA
-			}
+			} # end if new track
 			else
 			{
 				if (!inRadius[j]) # is location outside radius?
@@ -93,7 +93,7 @@
 					{
 						# animal just moved outside
 						stillInside = FALSE
-						percentIn = .calculateCrossingPercentageCmplx(z[i], z[j-1], z[j], radius)
+						percentIn = .calculateCrossingPercentageCmplx(loc[i], z[j-1], z[j], radius)
 						radiusExitTime = t[j-1] + percentIn * (t[j] - t[j-1])
 						timeInside = difftime(radiusExitTime, radiusEntranceTime, units = timeunits)
 						
@@ -107,7 +107,7 @@
 						else
 						{
 							revisits[i] = revisits[i] + 1
-							stats = data.frame(trajectory[i,idIdx], Re(z[i]), Im(z[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
+							stats = data.frame(trajectory[j,idIdx], Re(loc[i]), Im(loc[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
 											   timeInside, timeSinceLastVisit)
 							names(stats) = statsColNames
 							revisitStats = rbind(revisitStats, stats)
@@ -120,7 +120,7 @@
 					{
 						# animal just moved inside
 						stillInside = TRUE
-						percentIn = .calculateCrossingPercentageCmplx(z[i], z[j], z[j-1], radius)
+						percentIn = .calculateCrossingPercentageCmplx(loc[i], z[j], z[j-1], radius)
 						radiusEntranceTime = t[j] - percentIn * (t[j] - t[j-1])
 						timeSinceLastVisit = difftime(radiusEntranceTime, radiusExitTime, units = timeunits)
 						
@@ -156,7 +156,7 @@
 			else
 			{
 				revisits[i] = revisits[i] + 1
-				stats = data.frame(trajectory[i, idIdx], Re(z[i]), Im(z[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
+				stats = data.frame(trajectory[j, idIdx], Re(loc[i]), Im(loc[i]), i, revisits[i], radiusEntranceTime, radiusExitTime, 
 								   timeInside, timeSinceLastVisit)
 				names(stats) = statsColNames
 				revisitStats = rbind(revisitStats,  stats)	
