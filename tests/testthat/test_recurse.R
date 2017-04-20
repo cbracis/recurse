@@ -43,6 +43,10 @@ simpleLocsDist = cbind(0:4, 1:5, 9:5)
 horzTrack = data.frame(x = -1:3, y = 3, t = createTimeVector(5), id = "B2")
 twoTracks = rbind(simplePts, horzTrack)
 
+# one track that revisits one location
+oneTrack = twoTracks
+oneTrack$t[5:10] = oneTrack$t[5:10] + 1 * 24 * 60 * 60 # make second part of track a day later
+oneTrack$id = 1
 
 # track with data points on radius boundries so time in/out is easy to caluculate
 gridTrack = data.frame(
@@ -118,6 +122,15 @@ test_that("revisit stats",
 		  	expect_equal(stats2$timeInside, rep(c(0.5, 1, 1, 1, 1, 0.5), 2))
 		  	expect_equal(stats2$timeSinceLastVisit, c(1, rep(NA, length(expectedCoordIdx)))[-1]) 
 		  	
+		  })
+
+test_that("threshold",
+		  {
+		  	expect_equal(sum(getRecursions(oneTrack, 0.5, threshold = 0)$revisits), 12)
+		  	expect_equal(sum(getRecursions(oneTrack, 0.5, threshold = 1)$revisits), 12)
+		  	expect_equal(sum(getRecursions(oneTrack, 0.5, threshold = 23)$revisits), 12)
+		  	expect_equal(sum(getRecursions(oneTrack, 0.5, threshold = 24)$revisits), 10)
+		  	expect_equal(sum(getRecursions(oneTrack, 0.5, threshold = 100)$revisits), 10)
 		  })
 
 test_that("move objects",
