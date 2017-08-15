@@ -16,8 +16,13 @@ getRecursions.data.frame = function(x, radius, threshold = 0, timeunits = c("hou
 	results = getRecursionsCpp(x[,1], x[,2], x[,3], x[,4], x[,1], x[,2], 
 							   radius, threshold, timeunits, verbose)
 	
-	return(results)
+	class(results) = "recurse"
 	
-#	return( .getRecursions(x, x[,1:2], radius, threshold, timeunits, verbose) )
+	if (verbose)
+	{
+		class(results) = c("recurse", "recurse.verbose")
+	}
+	
+	return(results)
 }
 

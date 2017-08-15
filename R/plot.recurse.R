@@ -62,7 +62,8 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 		
 		fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=1:max(x$revisits))
 		ucord = graphics::par()$usr
-		xdelta = (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
+		pin = par()$pin
+		xdelta = pin[2] / pin[1] * (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
 		graphics::text(x = c(legendPos[1] - xdelta, legendPos[1] + xdelta), y = rep(legendPos[2], 2),
 			 labels = c(1, max(x$revisits)), pos = 1, offset = 1)
 	}

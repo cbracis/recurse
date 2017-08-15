@@ -1,0 +1,111 @@
+---
+title: "Using the recurse package to analyze revisitations in animal movement data"
+author: "Chloe Bracis"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the recurse package to analyze revisitations in animal movement data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+The `recurse` package can be used to analyze animal trajectory data to look for returns to a previouslt visited area, i.e. revisitations. These revists cold be interesting ecologically for a number of reasons. For example, they could be used to identify nesting or denning sites or important resource locations such as water points. Othere scenarios include trapline foraging behavior by pollinators, large-scale movement patterns like migration, and predator-prey interactions.
+
+The recurse package is flexible and supports identifying revisitations of the trajectory itself for single or multiple individuals as well as pre-specifying locations of interest for which to calculate revisitations. In addition to the number of revisits to each location, additional meterics are optionally calculated including the residence time at each location and the time between each revisit.
+
+## Calculating revisits
+
+The recurse package can work with trajectory data in the move format (Move or MoveStack object) (link move package) or the user can provide the data as a data frame with four columns: x, y, timestamp, and id. The first two columns give the (x,y) location of the animal. It is important to consider the projection of the data. Since the revists are counted within a radius around each lcation, an equal area projection would ensure similar size comparisons. Latitude/longitude is not recommended. The timestamp should be in POSIXct or POSIXlt format, and the id identies the individual.
+
+We will illustrate the functionality of the package with a simulated data set included in the package.
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+require(recurse)
+```
+```{r, fig.width=5, fig.height=5,}
+data(martin)
+plot(martin$x, martin$y, col = "red", pch = ".", xlab = "x", ylab = "y", asp = 1)
+
+```
+
+
+Now we are ready to calculate the recursions. The only required parameter is the radius. For each point in the trajectory, a circle of radius R is drawn around that point. Then the number of segments of the trajectory passing through that circle is counted, this is the number of revisits, so each point will have at least one revisit (the initial visit). For each revist, the time spent inside the circle is calculated, as well as the time since the last visit (NA for the first visit). In order to calculate the time values, the crossing time of the radius is calucluated by assuming linear movement at a constant speed between the points inside and outside the circle.
+
+The units for the radius are those of the (x,y) coordinates (e.g., meters in the case of a UTM projection). The radius should be set according to the question of interest. That is, to identify nesting and roosting sites, when the animal isn't moving, a very small radius would make sense, though importantly the radius should still be larger than the measurement error. For questions involving foraging dynamics, on the other hand, a radius matched to the average patch size might make sense. It's also important to consider the sampling interval of the data, hourly in the case of our simulated data. In general the radius should be large enough that multiple points of the trajectory will be inside depending on the question of interest (i.e., at the locations of interest). Here we've selected a radius of 2.
+
+```{r, echo=FALSE, fig.width=5, fig.height=5,}
+hist(sqrt(diff(martin$x)^2 + diff(martin$y)^2), xlab = "Step length", main = "")
+```
+
+
+The `recurse` object returned by the `getRecursions()` function contains a vector the same length as the data with the number of revisitations for each location. One way this data can be visualized is spatially.
+
+```{r, fig.width=5, fig.height=5, fig.show='hold'}
+martinvisit = getRecursions(martin, 2) 
+
+plot(martinvisit, martin, legendPos = c(15, -10))
+drawCircle(-25, 10, 2)
+
+hist(martinvisit$revisits, breaks = 20, main = "", xlab = "Revisits (radius = 2)")
+summary(martinvisit$revisits)
+```
+
+In addition to the number of revisits returned as the `revisits` vector, a number of statistics are calculated per visit in the `revisitStats` data frame (note that the `verbose = TRUE` option must be enabled, which it is by default).
+
+```{r}
+head(martinvisit$revisitStats)
+```
+
+Then certain things can be examined on a per visit basis. For example, one could examine the correaltion of visit length with visit entrance time.
+
+```{r, fig.width=5, fig.height=5}
+plot(martinvisit$revisitStats$entranceTime, martinvisit$revisitStats$timeInside,
+	 xlab = "Entrance time", ylab = "Visit duration (h)")
+
+require(lubridate)
+boxplot(martinvisit$revisitStats$timeInside ~ hour(martinvisit$revisitStats$entranceTime))
+plot(x = yday(martinvisit$revisitStats$entranceTime), y = martinvisit$revisitStats$timeInside, 
+	 xlab = "Entrance time", ylab = "Visit duration (h)")
+```
+
+## Vignette Info
+
+Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+
+## Styles
+
+The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+
+    output: 
+      rmarkdown::html_vignette:
+        css: mystyles.css
+
+## Figures
+
+The figure sizes have been customised so that you can easily put two images side-by-side. 
+
+```{r, fig.show='hold'}
+plot(1:10)
+plot(10:1)
+```
+
+You can enable figure captions by `fig_caption: yes` in YAML:
+
+    output:
+      rmarkdown::html_vignette:
+        fig_caption: yes
+
+Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+
+## More Examples
+
+You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
+
+```{r, echo=FALSE, results='asis'}
+knitr::kable(head(mtcars, 10))
+```
+
+Also a quote using `>`:
+
+> "He who gives up [code] safety for [code] speed deserves neither."
+([via](https://twitter.com/hadleywickham/status/504368538874703872))
