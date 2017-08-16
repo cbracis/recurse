@@ -13,11 +13,6 @@ plot data and generate correlated random walks.
 \details{
 The function \code{\link{getRecursions}} computes the revisit metrics, which can be plotted with 
 \code{\link{plot.recurse}}.
-
-Functions are also available to generate correlated random walks from probability distributions or 
-empirical distributions of steps and angles with \code{\link{generateCRW}} and 
-\code{\link{generateEmpiricalCRW}}. The walk can also be bounded by a polygon (for example to keep it in
-the correct habitat, land, water, etc.) with \code{\link{generateBoundedEmpiricalCRW}}.
 }
 \author{
 Chloe Bracis <cbracis@uw.edu>
