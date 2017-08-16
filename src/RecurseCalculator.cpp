@@ -338,7 +338,7 @@ List getRecursionsCpp(NumericVector trajX, NumericVector trajY,
 						double percentIn = calculateCrossingPercentage(locX[i], locY[i], 
                                                      				  trajX[j], trajY[j],
                                                                       trajX[j - 1], trajY[j - 1], radius);
-						radiusEntranceTime = trajT[j] - percentIn * (trajT[j] - trajT[j-1]);
+						radiusEntranceTime = trajT[j] - (Rcpp::Datetime)(percentIn * (trajT[j] - trajT[j-1]));
 						timeSinceLastVisit = radiusEntranceTime - radiusExitTime;
 
 						// use threshold to ignore brief trips outside
