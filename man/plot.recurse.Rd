@@ -25,4 +25,3 @@ the plot
 \description{
 Plots a trajectory color coded by number of revisits to each point.
 }
-

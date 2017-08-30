@@ -18,8 +18,10 @@ createTimeVector = function(n)
 createMoveObj = function(df)
 {
 	require(move)
-	return( move(x = df$x, y = df$y, time = df$t,
-				 proj = CRS("+proj=aeqd"), animal = df$id) )
+	moveObj = move(x = df$x, y = df$y, time = df$t,
+				 proj = CRS("+proj=aeqd"), animal = df$id) 
+	idData(moveObj) = df$id[1] # move ignores id, so set it directly
+	return(moveObj)
 }
 
 # data

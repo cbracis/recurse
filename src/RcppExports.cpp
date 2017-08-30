@@ -7,7 +7,7 @@ using namespace Rcpp;
 
 // calculateCrossingPercentage
 double calculateCrossingPercentage(double Cx, double Cy, double Ax, double Ay, double Bx, double By, double R);
-RcppExport SEXP recurse_calculateCrossingPercentage(SEXP CxSEXP, SEXP CySEXP, SEXP AxSEXP, SEXP AySEXP, SEXP BxSEXP, SEXP BySEXP, SEXP RSEXP) {
+RcppExport SEXP _recurse_calculateCrossingPercentage(SEXP CxSEXP, SEXP CySEXP, SEXP AxSEXP, SEXP AySEXP, SEXP BxSEXP, SEXP BySEXP, SEXP RSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -24,7 +24,7 @@ END_RCPP
 }
 // getIsNewTrack
 IntegerVector getIsNewTrack(StringVector trajId);
-RcppExport SEXP recurse_getIsNewTrack(SEXP trajIdSEXP) {
+RcppExport SEXP _recurse_getIsNewTrack(SEXP trajIdSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -35,7 +35,7 @@ END_RCPP
 }
 // getRecursionsCpp
 List getRecursionsCpp(NumericVector trajX, NumericVector trajY, DatetimeVector trajT, StringVector trajId, NumericVector locX, NumericVector locY, double radius, double threshold, String timeunits, bool verbose);
-RcppExport SEXP recurse_getRecursionsCpp(SEXP trajXSEXP, SEXP trajYSEXP, SEXP trajTSEXP, SEXP trajIdSEXP, SEXP locXSEXP, SEXP locYSEXP, SEXP radiusSEXP, SEXP thresholdSEXP, SEXP timeunitsSEXP, SEXP verboseSEXP) {
+RcppExport SEXP _recurse_getRecursionsCpp(SEXP trajXSEXP, SEXP trajYSEXP, SEXP trajTSEXP, SEXP trajIdSEXP, SEXP locXSEXP, SEXP locYSEXP, SEXP radiusSEXP, SEXP thresholdSEXP, SEXP timeunitsSEXP, SEXP verboseSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -52,4 +52,16 @@ BEGIN_RCPP
     rcpp_result_gen = Rcpp::wrap(getRecursionsCpp(trajX, trajY, trajT, trajId, locX, locY, radius, threshold, timeunits, verbose));
     return rcpp_result_gen;
 END_RCPP
+}
+
+static const R_CallMethodDef CallEntries[] = {
+    {"_recurse_calculateCrossingPercentage", (DL_FUNC) &_recurse_calculateCrossingPercentage, 7},
+    {"_recurse_getIsNewTrack", (DL_FUNC) &_recurse_getIsNewTrack, 1},
+    {"_recurse_getRecursionsCpp", (DL_FUNC) &_recurse_getRecursionsCpp, 10},
+    {NULL, NULL, 0}
+};
+
+RcppExport void R_init_recurse(DllInfo *dll) {
+    R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
+    R_useDynamicSymbols(dll, FALSE);
 }

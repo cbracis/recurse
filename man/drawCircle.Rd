@@ -31,4 +31,3 @@ invisibly, the x and y points of the drawn circle
 Draws a circle in data coordinates, so it will be a circle if the aspect
 ratio of the plot is 1, or else it will be appear as an ellipse.
 }
-

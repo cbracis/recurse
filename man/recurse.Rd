@@ -17,4 +17,3 @@ The function \code{\link{getRecursions}} computes the revisit metrics, which can
 \author{
 Chloe Bracis <cbracis@uw.edu>
 }
-

@@ -59,4 +59,3 @@ large amounts of data (e.g. tens of thousands of rows), so consider running the 
 recursion points or use clustering. Multiple individuals are handles via the \code{id} column of the 
 data.frame or using a MoveStack object.
 }
-

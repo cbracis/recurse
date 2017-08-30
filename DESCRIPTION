@@ -1,7 +1,7 @@
 Package: recurse
 Type: Package
 Title: Computes revisitation metrics for trajectory data
-Version: 0.9
+Version: 0.91
 Date: 2017-08-16
 Author: Chloe Bracis <cbracis@uw.edu>
 Maintainer: Chloe Bracis <cbracis@uw.edu>
@@ -12,5 +12,5 @@ LinkingTo: Rcpp
 Suggests:
     testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown
 LazyData: true
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 VignetteBuilder: knitr

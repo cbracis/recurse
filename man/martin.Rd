@@ -20,4 +20,3 @@ A dataset containing a sample trajectory with revisits.
 }
 }
 \keyword{datasets}
-

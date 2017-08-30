@@ -11,10 +11,10 @@ getRecursions.MoveStack = function(x, radius, threshold = 0, timeunits = c("hour
 		stop("move package needed for this function to work. Please install it.",
 			 call. = FALSE)
 	}	
-	if (isLonLat(x)) 
-	{
-		stop("A longitude latitude projection is not recommended for this function. To transform your coordinates use the spTransform function.")
-	}
+	#if (isLonLat(x)) 
+	#{
+	#	stop("A longitude latitude projection is not recommended for this function. To transform your coordinates use the spTransform function.")
+	#}
 	
 	xyt = data.frame(x@coords, t = x@timestamps, id = x@trackId)
 	
