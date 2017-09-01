@@ -1,19 +1,16 @@
-#' @describeIn getRecursions Get recursions for a data.frame object consisting of columns x, y, datetime, and id
-#' @method getRecursions data.frame
+#' @describeIn getRecursionsAtLocations Get recursions at specified locations for a data.frame object
+#' @method getRecursionsAtLocations data.frame
 #' @export
-getRecursions.data.frame = function(x, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+getRecursionsAtLocations.data.frame = function(x, locations, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 {
-	# ideas for large data sets:
-	# optionally specify locations
-	# specify number of clusters and take median of each cluster
-	
-	
 	stopifnot(is.data.frame(x))
 	stopifnot(ncol(x) == 4)
+	stopifnot(is.data.frame(locations))
+	stopifnot(ncol(locations) == 2)
 	stopifnot(radius > 0)
 	timeunits = match.arg(timeunits)
 	
-	results = getRecursionsCpp(x[,1], x[,2], x[,3], x[,4], x[,1], x[,2], 
+	results = getRecursionsCpp(x[,1], x[,2], x[,3], x[,4], locations[,1], locations[,2], 
 							   radius, threshold, timeunits, verbose)
 	
 	class(results) = "recurse"
@@ -33,5 +30,5 @@ getRecursions.data.frame = function(x, radius, threshold = 0, timeunits = c("hou
 	}
 	
 	return(results)
+	
 }
-

@@ -31,3 +31,20 @@ invisibly, the x and y points of the drawn circle
 Draws a circle in data coordinates, so it will be a circle if the aspect
 ratio of the plot is 1, or else it will be appear as an ellipse.
 }
+\details{
+This function is useful to display a representative circle with the specified radius
+on a plot of revisits.
+}
+\examples{
+data(martin)
+revisits = getRecursions(martin, radius = 1)
+plot(revisits, martin, legendPos = c(10, -15))
+drawCircle(10, -10, 1)
+
+}
+\seealso{
+\code{\link{plot.recurse}}
+}
+\author{
+Chloe Bracis <cbracis@uw.edu>
+}

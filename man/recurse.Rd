@@ -8,11 +8,12 @@
 \description{
 Computes revisitation metrics for trajectory data, such as the number of revisitations for each location 
 as well as the time spent for that visit and the time since the previous visit. Also includes functions to 
-plot data and generate correlated random walks.
+plot data.
 }
 \details{
 The function \code{\link{getRecursions}} computes the revisit metrics, which can be plotted with 
-\code{\link{plot.recurse}}.
+\code{\link{plot.recurse}}. Alternatively, \code{\link{getRecursionsAtLocations}} computes revisit metrics
+for specified locations, rather than all locations in the movement trajectory.
 }
 \author{
 Chloe Bracis <cbracis@uw.edu>

@@ -21,13 +21,12 @@ getRecursions(x, radius, threshold = 0, timeunits = c("hours", "secs",
   timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 }
 \arguments{
-\item{x}{Either a data frame, Move, or MoveStack object. For a data frame, 
-the trajectory data with four columns, \code{x} the x-coordinate, 
-\code{y} the y-cordinate, \code{t} the datetime, and \code{id} the numeric animal id.}
+\item{x}{Either a data frame, \link[move]{Move-class}, or \link[move]{MoveStack} object. For a data frame, 
+the trajectory data with four columns (the x-coordinate, the y-cordinate, the datetime, and the animal id).}
 
-\item{radius}{numeric. radius to use in units of the location data to detect recursions.}
+\item{radius}{numeric radius to use in units of the (x,y) location data to detect recursions.}
 
-\item{threshold}{a time diference (in units \code{timeunits}) to ignore excursions outside the radius.}
+\item{threshold}{a time diference (in units \code{timeunits}) to ignore excursions outside the radius. Defaults to 0.}
 
 \item{timeunits}{character string specifying units to calculate time differences in for the time spans inside the radius and since the 
 visit in \code{revisitStats}. Defaults to hours.}
@@ -36,17 +35,18 @@ visit in \code{revisitStats}. Defaults to hours.}
 \code{FALSE} to output basic information.}
 }
 \value{
-A list with several components. \code{revisits}, \code{firstPassageTime}, \code{residenceTime}
-are vectors of the same length as the x dataframe. \code{revisits} is the number of revisits for each 
+A list with several components, \code{revisits} and \code{residenceTime}
+are vectors of the same length as the \code{x} dataframe. \code{revisits} is the number of revisits for each 
 location, where 1 means that there were 
-no revisits, only the initial visit. \code{firstPassageTime} is the first passage time for the visit 
-through the focal coordinate. \code{residenceTime} is the total time spent withing the radius. \code{radius}
-is the spcified radius used for all the calculations. When \code{verbose = TRUE}, additional inforamtion 
-is also returned, \code{dists} and \code{revisitStats}.Next, \code{dists} gives the distance matrix between
+no revisits, only the initial visit. \code{residenceTime} is the total time spent withing the radius. \code{radius}
+is the spcified radius used for all the calculations. 
+
+When \code{verbose = TRUE}, additional inforamtion 
+is also returned, \code{dists} and \code{revisitStats}. Next, \code{dists} gives the distance matrix between
 all ocations. Finally, \code{revisitStats} gives further statistics on each visit. These are calculated 
 per location (i.e., no aggregation of nearby points is performed), and give the index and location
 of the point of the track at the center of the radius, the radius entrace and exit time of the track for that 
-visit, how much time was spent inside the radius, and how long since the last visit (NA for the first visit).
+visit, how much time was spent inside the radius, and how long since the last visit (\code{NA} for the first visit).
 }
 \description{
 A circle of radius R is drawn around each point in the trajectory. The number of
@@ -54,7 +54,7 @@ revists is calculated as the number of segments of the trajectory passing throug
 }
 \details{
 For each point in the trajectory, a circle of radius R is drawn around that point.
-Then the number of segments of the trajectory passing through that circle is counted, this is
+Then the number of segments of the trajectory passing through that circle is counted. This is
 the number of revisits, so each point will have at least one revisit (the initial visit). For each 
 revist, the time spent inside the circle is calculated, as well as the time since the last 
 visit (NA for the first visit). In order to calculate the time values, the crossing time of the
@@ -62,19 +62,32 @@ radius is calucluated by assuming linear movement at a constant speed between th
 and outside the circle.
 
 \strong{Projection.} Consider the projection used. Since segments are counted passing through circles
-drawn around points, an equal area projection would ensure similar size comparisons. 
+drawn around points, an equal area projection would ensure similar size comparisons (e.g., \code{\link[move]{spTransform}}). 
 
 Either single or multiple individuals are supported, but be aware that this function will be slow with
-large amounts of data (e.g. tens of thousands of rows), so consider running the versions that pre-specify
-recursion points or use clustering. Multiple individuals are handles via the \code{id} column of the 
-data.frame or using a MoveStack object.
+large amounts of data (e.g. millions of points), so consider pre-specifying the locations 
+(\code{\link{getRecursionsAtLocations}}) or use clustering. Multiple individuals are handled via the \code{id} column of the 
+data.frame or using a \link[move]{MoveStack} object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: Get recursions for a data.frame object consisting of columns x, y, and datetime
+\item \code{data.frame}: Get recursions for a data.frame object consisting of columns x, y, datetime, and id
 
-\item \code{Move}: Get recursions for a Move object
+\item \code{Move}: Get recursions for a \link[move]{Move-class} object
 
-\item \code{MoveStack}: Get recursions for a MoveStack object
+\item \code{MoveStack}: Get recursions for a \link[move]{MoveStack} object
 }}
 
+\examples{
+data(martin)
+revisits = getRecursions(martin, radius = 1)
+plot(revisits, martin, legendPos = c(10, -15))
+drawCircle(10, -10, 1)
+
+}
+\seealso{
+\code{\link{getRecursionsAtLocations}}
+}
+\author{
+Chloe Bracis <cbracis@uw.edu>
+}
