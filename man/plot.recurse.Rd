@@ -7,11 +7,11 @@
 \method{plot}{recurse}(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 }
 \arguments{
-\item{x}{\code{recurse} object returned from call to \link{getRecursions}}
+\item{x}{\code{recurse} object returned from call to \code{\link{getRecursions}}}
 
-\item{xyt}{data.frame of x, y, and t representing the xy-coordinates and the time (same as call to \link{getRecursions})}
+\item{xyt}{data.frame of x, y, t, and id representing the xy-coordinates and the time (same as call to \code{\link{getRecursions}})}
 
-\item{...}{additional arguments to \link{plot}}
+\item{...}{additional arguments to \code{\link{plot}}}
 
 \item{col}{optional vector of colors as long as the maximum number of revisits to color code trajectory points}
 
@@ -24,4 +24,21 @@ the plot
 }
 \description{
 Plots a trajectory color coded by number of revisits to each point.
+}
+\details{
+This method allows the user to visually represent the number of revisitations by location. The size
+of the circle of radius R can be added to the plot with \code{\link{drawCircle}}.
+}
+\examples{
+data(martin)
+revisits = getRecursions(martin, radius = 1)
+plot(revisits, martin, legendPos = c(10, -15))
+drawCircle(10, -10, 1)
+
+}
+\seealso{
+\code{\link{getRecursions}}, \code{\link{getRecursionsAtLocations}}, \code{\link{drawCircle}}
+}
+\author{
+Chloe Bracis <cbracis@uw.edu>
 }

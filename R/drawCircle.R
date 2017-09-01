@@ -3,6 +3,9 @@
 #' @description Draws a circle in data coordinates, so it will be a circle if the aspect
 #' ratio of the plot is 1, or else it will be appear as an ellipse.
 #' 
+#' @details This function is useful to display a representative circle with the specified radius
+#' on a plot of revisits.
+#' 
 #' @param x x-coordiante of circle center
 #' @param y y-coordiante of circle center
 #' @param radius radius of circle
@@ -13,7 +16,17 @@
 #' @param lwd line width
 #' @return invisibly, the x and y points of the drawn circle
 #' 
+#' @seealso \code{\link{plot.recurse}}
+#' 
+#' @examples
+#' data(martin)
+#' revisits = getRecursions(martin, radius = 1)
+#' plot(revisits, martin, legendPos = c(10, -15))
+#' drawCircle(10, -10, 1)
+#' 
+#' @author Chloe Bracis <cbracis@uw.edu>
 #' @export
+#' 
 drawCircle= function (x, y, radius, nv = 100, border = NULL, col = NA, lty = 1, lwd = 1) 
 {
 	# based on draw.circle() from plotrix, but draw oval for non 1-1 aspect ratio 

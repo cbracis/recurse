@@ -10,9 +10,9 @@ getRevisits = function(data, radius)
 	return(getRecursions(data, radius)$revisits)
 }
 
-createTimeVector = function(n)
+createTimeVector = function(n, tz = "")
 {
-	return(as.POSIXct("2009-5-1 1:00:00") + (1:n) * 60 * 60) # every hour
+	return(as.POSIXct("2009-5-1 1:00:00", tz = tz) + (1:n) * 60 * 60) # every hour
 }
 
 createMoveObj = function(df)
@@ -22,6 +22,13 @@ createMoveObj = function(df)
 				 proj = CRS("+proj=aeqd"), animal = df$id) 
 	idData(moveObj) = df$id[1] # move ignores id, so set it directly
 	return(moveObj)
+}
+
+testTz = function(df)
+{
+	output = getRecursions(df, 1)
+	expect_equal(attr(output$revisitStats$entranceTime, "tzone"), attr(df$t, "tzone"))
+	expect_equal(attr(output$revisitStats$exitTime, "tzone"), attr(df$t, "tzone"))
 }
 
 # data
@@ -145,5 +152,16 @@ test_that("move objects",
 		  	
 		  })
 
-# need to add some tests here for move and movestack, first figure out how to create
-# add and test other versions of recurse
+test_that("timezone",
+		  {
+		  	defaultTz = data.frame(x = 1, y = 1:5, t = createTimeVector(5), id = "default")
+		  	utcTz = data.frame(x = 1, y = 1:5, t = createTimeVector(5, tz = "UTC"), id = "UTC")
+		  	sydneyTz = data.frame(x = 1, y = 1:5, t = createTimeVector(5, tz = "Australia/Sydney"), id = "Australia/Sydney")
+		  	limaTz = data.frame(x = 1, y = 1:5, t = createTimeVector(5, tz = "America/Lima"), id = "America/Lima")
+
+		  	testTz(defaultTz)
+		  	testTz(utcTz)
+		  	testTz(sydneyTz)
+		  	testTz(limaTz)
+		  })
+

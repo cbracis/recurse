@@ -1,4 +1,4 @@
-#' @describeIn getRecursions Get recursions for a Move object
+#' @describeIn getRecursions Get recursions for a \link[move]{Move-class} object
 #' @method getRecursions Move
 #' @export
 getRecursions.Move = function(x, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), 
@@ -11,12 +11,8 @@ getRecursions.Move = function(x, radius, threshold = 0, timeunits = c("hours", "
 		stop("move package needed for this function to work. Please install it.",
 			 call. = FALSE)
 	}	
-	#if (isLonLat(x)) 
-	#{
-	#	stop("A longitude latitude projection is not recommended for this function. To transform your coordinates use the spTransform function.")
-	#}
-	
-	id = idData(x)
+
+	id = move::idData(x)
 	
 	if (length(id) > 1)
 	{
