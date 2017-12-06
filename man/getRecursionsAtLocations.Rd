@@ -44,7 +44,8 @@ A list with several components, \code{revisits} and \code{residenceTime}
 are vectors of the same length as the \code{x} dataframe. \code{revisits} is the number of revisits for each 
 location, where 1 means that there were 
 no revisits, only the initial visit. \code{residenceTime} is the total time spent withing the radius. \code{radius}
-is the spcified radius used for all the calculations. 
+is the specified radius used for all the calculations. \code{timeunits} is the specified time units used to specify
+timespans.
 
 When \code{verbose = TRUE}, additional inforamtion 
 is also returned, \code{dists} and \code{revisitStats}. Next, \code{dists} gives the distance matrix between

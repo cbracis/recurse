@@ -4,8 +4,10 @@ author: "Chloe Bracis"
 date: '`r Sys.Date()`'
 output: rmarkdown::html_vignette
 number_sections: yes
-vignette: |
-  %\VignetteIndexEntry{Using the recurse package to analyze revisitations in animal movement data} %\VignetteEngine{knitr::rmarkdown} %\VignetteEncoding{UTF-8}
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{Using the recurse package to analyze revisitations in animal movement data}
+  %\VignetteEncoding{UTF-8}
 ---
 # Overview
 
