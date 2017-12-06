@@ -51,3 +51,21 @@ NULL
 #' @usage data(martin)
 #' @format A data frame with 600 rows and 4 columns
 NULL
+
+#' Sample trajectory (wren).
+#'
+#' A dataset containing a sample trajectory with revisits.
+#'
+#' \itemize{
+#'   \item x. x-coordinate
+#'   \item y. y-coordinate
+#'   \item t. time
+#'   \item id. identifier
+#' }
+#'
+#' @docType data
+#' @keywords datasets
+#' @name wren
+#' @usage data(wren)
+#' @format A data frame with 600 rows and 4 columns
+NULL

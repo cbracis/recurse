@@ -12,6 +12,7 @@ getRecursionsAtLocations.data.frame = function(x, locations, radius, threshold =
 	
 	results = getRecursionsCpp(x[,1], x[,2], x[,3], x[,4], locations[,1], locations[,2], 
 							   radius, threshold, timeunits, verbose)
+	results$timeunits = timeunits
 	
 	class(results) = "recurse"
 	

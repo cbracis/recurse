@@ -202,7 +202,7 @@ List getRecursionsCpp(NumericVector trajX, NumericVector trajY,
 		// reset variables for new location
 		stillInside = inRadius[0]; // start with animal inside radius?
 		appendToPreviousRevisit = FALSE;
-		radiusEntranceTime = (stillInside) ? trajT[0] : NA_DATETIME;
+		radiusEntranceTime = (stillInside) ? (Rcpp::Datetime)trajT[0] : NA_DATETIME;
 		radiusExitTime = NA_DATETIME;
 		timeSinceLastVisit = NA_REAL;
 		
@@ -268,7 +268,7 @@ List getRecursionsCpp(NumericVector trajX, NumericVector trajY,
 				// reset variables for new trajectory
 				stillInside = inRadius[j]; // start with animal inside radius?
 				appendToPreviousRevisit = FALSE;
-				radiusEntranceTime = (stillInside) ? trajT[j] : NA_DATETIME;
+				radiusEntranceTime = (stillInside) ? (Rcpp::Datetime)trajT[j] : NA_DATETIME;
 				radiusExitTime = NA_DATETIME;
 				timeSinceLastVisit = NA_REAL;
 			} // end if new track
@@ -338,7 +338,7 @@ List getRecursionsCpp(NumericVector trajX, NumericVector trajY,
 						double percentIn = calculateCrossingPercentage(locX[i], locY[i], 
                                                      				  trajX[j], trajY[j],
                                                                       trajX[j - 1], trajY[j - 1], radius);
-						radiusEntranceTime = trajT[j] - (Rcpp::Datetime)(percentIn * (trajT[j] - trajT[j-1]));
+						radiusEntranceTime = (Rcpp::Datetime)trajT[j] - (Rcpp::Datetime)(percentIn * (trajT[j] - trajT[j-1]));
 						timeSinceLastVisit = radiusEntranceTime - radiusExitTime;
 
 						// use threshold to ignore brief trips outside
