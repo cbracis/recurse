@@ -8,9 +8,9 @@ drawCircle(x, y, radius, nv = 100, border = NULL, col = NA, lty = 1,
   lwd = 1)
 }
 \arguments{
-\item{x}{x-coordiante of circle center}
+\item{x}{x-coordinate of circle center}
 
-\item{y}{y-coordiante of circle center}
+\item{y}{y-coordinate of circle center}
 
 \item{radius}{radius of circle}
 

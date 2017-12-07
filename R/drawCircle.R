@@ -6,8 +6,8 @@
 #' @details This function is useful to display a representative circle with the specified radius
 #' on a plot of revisits.
 #' 
-#' @param x x-coordiante of circle center
-#' @param y y-coordiante of circle center
+#' @param x x-coordinate of circle center
+#' @param y y-coordinate of circle center
 #' @param radius radius of circle
 #' @param nv how many plotted segments
 #' @param border polygon border

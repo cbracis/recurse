@@ -6,8 +6,8 @@
 #' 
 #' @details When recursions are calculated, the residence time in the radius around each location is also 
 #' calculated. This method allows the user to post-process the results from calculating recursions to calculate
-#' residence time over user-specified intervals, rather than the entire trajectory. This allows the calulation
-#' of residence time on biologically relevant scales, such as seasons, and in cases where large gaps beween 
+#' residence time over user-specified intervals, rather than the entire trajectory. This allows the calculation
+#' of residence time on biologically relevant scales, such as seasons, and in cases where large gaps between 
 #' visits (e.g., a seasonal migrant) may make splitting up the residence time preferable.
 #' 
 #' Note that care should be taken to use the same time zone when specifying the break points as used in the
@@ -15,10 +15,10 @@
 #' 
 #' @param x \code{recurse} object returned from call to \code{\link{getRecursions}} or 
 #' \code{\link{getRecursionsAtLocations}} with \code{verbose = TRUE}
-#' @param breaks vector of POSIX datetimes descibing the interval boundries
+#' @param breaks vector of POSIX datetimes describing the interval boundaries
 #' @param labels (optional) vector or names for the intervals
 #' 
-#' @return A matrix of residence times where the columns are the coordinate indicies of the locations (either 
+#' @return A matrix of residence times where the columns are the coordinate indices of the locations (either 
 #' movement trajectory locations or user-specified locations) and the rows are the time intervals.
 #' 
 #' @seealso \code{\link{getRecursions}}, \code{\link{getRecursionsAtLocations}}
