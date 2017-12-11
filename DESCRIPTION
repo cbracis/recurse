@@ -1,8 +1,8 @@
 Package: recurse
 Type: Package
 Title: Computes Revisitation Metrics for Trajectory Data
-Version: 1.0.0
-Date: 2017-12-07
+Version: 1.0.1
+Date: 2017-12-11
 Author: Chloe Bracis <cbracis@uw.edu>
 Maintainer: Chloe Bracis <cbracis@uw.edu>
 Description: Computes revisitation metrics for trajectory data, such as the number of revisitations for each location as well as the time spent for that visit and the time since the previous visit. Also includes functions to plot data.
