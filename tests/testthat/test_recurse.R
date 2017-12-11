@@ -165,3 +165,17 @@ test_that("timezone",
 		  	testTz(limaTz)
 		  })
 
+test_that("interval res time",
+		  {
+		  	vis = getRecursions(simplePts, 0.5)
+		  	
+		  	expect_equal(as.vector(calculateIntervalResidenceTime(vis, breaks = simplePts$t[c(1,5)])),
+		  				 vis$residenceTime)
+		  	
+		  	expectedMatrix = matrix(c(0.5, 1, 0.5, 0, 0, 0, 0, 0.5, 1, 0.5), ncol = 2, 
+		  							dimnames = list(1:5, c("A", "B")))
+		  	expect_equal(calculateIntervalResidenceTime(vis, breaks = simplePts$t[c(1,3,5)], labels = c("A", "B")),
+		  				 expectedMatrix)
+		  	
+		  })
+

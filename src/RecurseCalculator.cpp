@@ -82,8 +82,8 @@ double calculateCrossingPercentage(double Cx, double Cy,
 		//Fy = (t-dt)*Dy + Ay
 									
 		// compute second intersection point
-		double Gx = (t+dt)*Dx + Ax;
-		double Gy = (t+dt)*Dy + Ay;
+		//double Gx = (t+dt)*Dx + Ax;
+		//double Gy = (t+dt)*Dy + Ay;
 								
 		p = (t + dt) / LAB;
 	}

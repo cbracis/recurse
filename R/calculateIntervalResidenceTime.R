@@ -64,20 +64,23 @@ calculateIntervalResidenceTime = function (x, breaks, labels = NULL)
 	for (i in 1:nIntervals)
 	{
 		statsSubset = x$revisitStats[x$revisitStats$entranceTime >= breaks[i] & x$revisitStats$exitTime <= breaks[i + 1],]
-		intervalRT = tapply(statsSubset$timeInside, statsSubset$coordFactor, sum, default = 0)
+		rt = tapply(statsSubset$timeInside, statsSubset$coordFactor, sum)
+		intervalRT = replace(rt, is.na(rt), 0)
 
 		# check for partial overlaps
 		
 		# start of interval, section from breaks[i] to exit time
 		statsSubset = x$revisitStats[x$revisitStats$entranceTime < breaks[i] & x$revisitStats$exitTime > breaks[i],]
-		intervalRT = intervalRT + tapply(difftime(statsSubset$exitTime, breaks[i], units = timeunits), 
-										 statsSubset$coordFactor, sum, default = 0)
-
+		rt = tapply(difftime(statsSubset$exitTime, breaks[i], units = timeunits), 
+										 statsSubset$coordFactor, sum)
+		intervalRT = intervalRT + replace(rt, is.na(rt), 0)
+		
 		# end of interval, section from entrance time to breaks[i+1]
 		statsSubset = x$revisitStats[x$revisitStats$entranceTime < breaks[i + 1] & x$revisitStats$exitTime > breaks[i + 1],]
-		intervalRT = intervalRT + tapply(difftime(breaks[i + 1], statsSubset$entranceTime, units = timeunits), 
-										 statsSubset$coordFactor, sum, default = 0)
-
+		rt = tapply(difftime(breaks[i + 1], statsSubset$entranceTime, units = timeunits), 
+										 statsSubset$coordFactor, sum)
+		intervalRT = intervalRT + replace(rt, is.na(rt), 0)
+		
 		# entire interval
 		statsSubset = x$revisitStats[x$revisitStats$entranceTime < breaks[i] & x$revisitStats$exitTime > breaks[i + 1],]
 		intervalRT = intervalRT + table(statsSubset$coordFactor) * difftime(breaks[i + 1], breaks[i], units = timeunits)
