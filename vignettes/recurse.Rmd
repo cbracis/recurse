@@ -28,7 +28,7 @@ We will illustrate the functionality of the package with a simulated data set in
 ```{r, results='hide', message=FALSE, warning=FALSE}
 require(recurse)
 require(scales)
-
+require(sp)
 ```
 ```{r, fig.width=6, fig.height=6}
 data(martin)
@@ -125,7 +125,7 @@ There are further options and methods available that may be of use.
 
 ## Specifying locations
 
-Rather than using all locations in the trajectory, it is also possible to specify specific locations at which to calculate revisits. For example, perhaps we are interested in determining if `martin` comes back to the release location at (0,0) or some other specific locations, such as (10, 10) or (20, 10) that are of known interest. For this it is possible to use the `getRecursionsAtLocations()` function, which operates ver similarly to the `getRecursions()`function.
+Rather than using all locations in the trajectory, it is also possible to specify specific locations at which to calculate revisits. For example, perhaps we are interested in determining if `martin` comes back to the release location at (0,0) or some other specific locations, such as (10, 10) or (20, 10) that are of known interest. For this it is possible to use the `getRecursionsAtLocations()` function, which operates very similarly to the `getRecursions()`function.
 
 ```{r}
 
@@ -156,6 +156,29 @@ with(animals[popvisit$revisits > visitThreshold,],
 		   pch = c(15:17)[popCluster$cluster]) )
 legend("topleft", pch = 15:17, legend = paste("cluster", 1:3), bty = "n")
 ```
+
+## Polygons
+
+As an alternative to using circular zones around trajectory or other points, one can specify a polygon in which to calaculate revisits and residence time. This could be useful if there was a specific landscape feature where the precise boundary is important, such as a protected area, land use type, or territory.
+
+There are several important restrictions that are important to note when using the polygon feature. First, the polygon must be convex (that is, any point on a line drawn from one point in the polygon to another point in the polygon will be inside the polygon). Secondly, only a single polygon at a time may be analyzed.
+
+```{r, echo=FALSE, fig.width=5, fig.height=5}
+protectedArea = sp::SpatialPolygons( list(
+		   	    	 	sp::Polygons( list(sp::Polygon(cbind(c(4,10,9,3.5,4),c(11,9,13,13.5,11)))), ID = 1 )
+		    	 	 	))
+plot(martin$x, martin$y, type = "l", pch = 20, 
+	 xlab = "x", ylab = "y", asp = 1)
+plot(protectedArea, add = TRUE, border = "red", lwd = 2)
+```
+
+So, for example, if we are interested in the number of visits and time spent by `martin` in a protected area indicated by the red polygon above, we can use the `getRecursionsInPolygon` method to examine this.
+
+```{r}
+getRecursionsInPolygon(martin, protectedArea)
+```
+
+The output of `getRecursionsInPolygon` is similar to that of `getRecursions`, and we can see that there were three visits lasting a total of about 24 hours, as well as specific information on each visit.
 
 ## Threshold
 

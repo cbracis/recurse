@@ -179,3 +179,12 @@ test_that("interval res time",
 		  	
 		  })
 
+test_that("polygon",
+		  {
+		   require(sp)
+		   poly = sp::SpatialPolygons( list(
+		   	    	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
+		    	 	 	))
+		   expect_equal(getRecursionsInPolygon(track, poly)$revisits, 2)
+		  })
+
