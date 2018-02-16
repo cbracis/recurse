@@ -16,8 +16,8 @@
 #' 
 #' \strong{Polygon.} The polygon must be specified as a \link[sp]{SpatialPolygons} object. It should consist
 #' of a single polygon (rather than a list of multiple polygons). It should further be convex, though this
-#' requirement is not enforced, canculations for non-convex polygons will not necessarily be accurate. It may
-#' be advantagous to simplify complex geometry in order to shorten the time to run. If it is necessary to use a
+#' requirement is not enforced, calculations for non-convex polygons will not necessarily be accurate. It may
+#' be advantageous to simplify complex geometry in order to shorten the time to run. If it is necessary to use a
 #' non-convex polygon, one approach would be to split it into convex pieces that can be run one-by-one. However,
 #' some visits would then be double-counted and would need to be combined back together based on the
 #' entrance/exit times and sequence of trajectory locations.
