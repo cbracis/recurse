@@ -38,6 +38,9 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 		return( scales::gradient_n_pal(cols)(seq(0, 1, length = n)) )
 	}
 	
+	# will sort in order of revisits so those with the most drawn on top
+	colIdx = sort(x$revisits)
+	
 	if (!methods::hasArg(col))
 	{
 		if (requireNamespace("scales", quietly = TRUE))
@@ -49,6 +52,13 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 		{
 			col = rev(grDevices::heat.colors(max(x$revisits)))
 		}
+		
+		# need to handle 0 revisits as a special case becasue we can't index by 0
+		if (min(x$revisits) == 0)
+		{
+			col = c("#808080", col) # add gray first
+			colIdx = colIdx + 1 # so that revisits of 0 now at index 1
+		}
 	}
 	
 	if (inherits(xyt, "Move") & requireNamespace("move", quietly = TRUE))
@@ -58,7 +68,7 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 	
 	revOrder = order(x$revisits)
 	graphics::plot(xyt[revOrder,1], xyt[revOrder,2], xlab = "x", ylab = "y", asp = 1, 
-		 col = col[sort(x$revisits)], ...)
+		 col = col[colIdx], ...)
 	
 	if(!is.null(legendPos))
 	{
@@ -73,12 +83,12 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 			stop("legendPos should be a vector of length 2 of the x,y coordinates for the legend.")
 		}
 		
-		fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=1:max(x$revisits))
+		fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=min(x$revisits):max(x$revisits))
 		ucord = graphics::par()$usr
 		pin = graphics::par()$pin
 		xdelta = pin[2] / pin[1] * (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
 		graphics::text(x = c(legendPos[1] - xdelta, legendPos[1] + xdelta), y = rep(legendPos[2], 2),
-			 labels = c(1, max(x$revisits)), pos = 1, offset = 1)
+			 labels = c(min(x$revisits), max(x$revisits)), pos = 1, offset = 1)
 	}
 	
 }
