@@ -1,5 +1,9 @@
 ## Changes in recurse version 1.1.1
 ### Bug fixes
+- fix problem with deprecated C++, change from bind1st() to bind()
+
+## Changes in recurse version 1.1.1
+### Bug fixes
 - fix problem with plotting when there are some locations with 0 revisists
 
 ## Changes in recurse version 1.1.0

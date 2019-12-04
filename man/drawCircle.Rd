@@ -4,8 +4,7 @@
 \alias{drawCircle}
 \title{Draws a circle}
 \usage{
-drawCircle(x, y, radius, nv = 100, border = NULL, col = NA, lty = 1,
-  lwd = 1)
+drawCircle(x, y, radius, nv = 100, border = NULL, col = NA, lty = 1, lwd = 1)
 }
 \arguments{
 \item{x}{x-coordinate of circle center}

@@ -9,18 +9,37 @@
 \alias{getRecursionsInPolygon.MoveStack}
 \title{Calculates recursion information from the trajectory inside a polygon}
 \usage{
-\method{getRecursionsInPolygon}{Move}(trajectory, polygon, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursionsInPolygon}{Move}(
+  trajectory,
+  polygon,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-getRecursionsInPolygon(trajectory, polygon, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+getRecursionsInPolygon(
+  trajectory,
+  polygon,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursionsInPolygon}{data.frame}(trajectory, polygon,
-  threshold = 0, timeunits = c("hours", "secs", "mins", "days"),
-  verbose = TRUE)
+\method{getRecursionsInPolygon}{data.frame}(
+  trajectory,
+  polygon,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursionsInPolygon}{MoveStack}(trajectory, polygon, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursionsInPolygon}{MoveStack}(
+  trajectory,
+  polygon,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{trajectory}{A data frame with four columns (the x-coordinate, the y-coordinate, the datetime, and the animal id).}

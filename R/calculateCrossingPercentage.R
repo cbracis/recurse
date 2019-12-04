@@ -2,6 +2,10 @@
 #'
 #' @description Calculates the percentage of a segment that lies within a circle for a point
 #' A inside the circle and point B outside the circle for a circle with center C and radius R.
+#' @param Cz circle center
+#' @param Az point 1
+#' @param Bz point 2
+#' @param R radius
 #' 
 .calculateCrossingPercentageCmplx = function(Cz, Az, Bz, R)
 {

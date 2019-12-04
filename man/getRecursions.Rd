@@ -8,17 +8,37 @@
 \alias{getRecursions.MoveStack}
 \title{Calculates recursion information from the trajectory}
 \usage{
-getRecursions(x, radius, threshold = 0, timeunits = c("hours", "secs",
-  "mins", "days"), verbose = TRUE)
+getRecursions(
+  x,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursions}{data.frame}(x, radius, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursions}{data.frame}(
+  x,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursions}{Move}(x, radius, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursions}{Move}(
+  x,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursions}{MoveStack}(x, radius, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursions}{MoveStack}(
+  x,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{x}{Either a data frame, \link[move]{Move-class}, or \link[move]{MoveStack} object. For a data frame, 

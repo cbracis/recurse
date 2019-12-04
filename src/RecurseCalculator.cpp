@@ -1,5 +1,6 @@
 
 #include <Rcpp.h>
+// [[Rcpp::plugins(cpp11)]]
 
 using namespace Rcpp;
 using std::pow;
@@ -414,14 +415,14 @@ List getRecursionsCpp(NumericVector trajX, NumericVector trajY,
 	
 	// convert from seconds to requested units (invert conversion factor)
 	transform(rt.begin(), rt.end(), rt.begin(), 
-           std::bind1st(std::multiplies<double>(), 1.0 / conversionToSecs) );
+           std::bind(std::multiplies<double>(), std::placeholders::_1, 1.0 / conversionToSecs) ); // std::placeholders::_1 to replave bind1st with bind
 	
 	if (verbose)
 	{
 		transform(statsTimeInside.begin(), statsTimeInside.end(), statsTimeInside.begin(), 
-            std::bind1st(std::multiplies<double>(), 1.0 / conversionToSecs) );
+            std::bind(std::multiplies<double>(), std::placeholders::_1, 1.0 / conversionToSecs) );
 		transform(statsTimeSinceLastVisit.begin(), statsTimeSinceLastVisit.end(), statsTimeSinceLastVisit.begin(), 
-            std::bind1st(std::multiplies<double>(), 1.0 / conversionToSecs) );
+            std::bind(std::multiplies<double>(), std::placeholders::_1, 1.0 / conversionToSecs) );
 		
 		
 		// increment statsIdx past last value, i.e. equivalent to end()

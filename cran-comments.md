@@ -1,5 +1,5 @@
 ## Test environments
-* local OS X install 3.4.2
+* local OS X install 3.6.1
 * win-builder, dev and release
 
 ## R CMD check results

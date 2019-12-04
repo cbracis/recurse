@@ -9,19 +9,41 @@
 \alias{getRecursionsAtLocations.MoveStack}
 \title{Calculates recursion information from the trajectory for specific locations}
 \usage{
-getRecursionsAtLocations(x, locations, radius, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+getRecursionsAtLocations(
+  x,
+  locations,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursionsAtLocations}{data.frame}(x, locations, radius,
-  threshold = 0, timeunits = c("hours", "secs", "mins", "days"),
-  verbose = TRUE)
+\method{getRecursionsAtLocations}{data.frame}(
+  x,
+  locations,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursionsAtLocations}{Move}(x, locations, radius, threshold = 0,
-  timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
+\method{getRecursionsAtLocations}{Move}(
+  x,
+  locations,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 
-\method{getRecursionsAtLocations}{MoveStack}(x, locations, radius,
-  threshold = 0, timeunits = c("hours", "secs", "mins", "days"),
-  verbose = TRUE)
+\method{getRecursionsAtLocations}{MoveStack}(
+  x,
+  locations,
+  radius,
+  threshold = 0,
+  timeunits = c("hours", "secs", "mins", "days"),
+  verbose = TRUE
+)
 }
 \arguments{
 \item{x}{Either a data frame, \link[move]{Move-class}, or \link[move]{MoveStack} object. For a data frame, 

@@ -3,7 +3,6 @@
 \docType{package}
 \name{recurse}
 \alias{recurse}
-\alias{recurse-package}
 \title{Computes revisitation metrics for trajectory data}
 \description{
 Computes revisitation metrics for trajectory data, such as the number of revisitations for each location 
