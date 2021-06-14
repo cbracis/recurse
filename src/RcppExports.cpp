@@ -53,11 +53,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// getRecursions3DCpp
+List getRecursions3DCpp(NumericVector trajX, NumericVector trajY, NumericVector trajZ, DatetimeVector trajT, StringVector trajId, NumericVector locX, NumericVector locY, NumericVector locZ, double radius, double threshold, String timeunits, bool verbose);
+RcppExport SEXP _recurse_getRecursions3DCpp(SEXP trajXSEXP, SEXP trajYSEXP, SEXP trajZSEXP, SEXP trajTSEXP, SEXP trajIdSEXP, SEXP locXSEXP, SEXP locYSEXP, SEXP locZSEXP, SEXP radiusSEXP, SEXP thresholdSEXP, SEXP timeunitsSEXP, SEXP verboseSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type trajX(trajXSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type trajY(trajYSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type trajZ(trajZSEXP);
+    Rcpp::traits::input_parameter< DatetimeVector >::type trajT(trajTSEXP);
+    Rcpp::traits::input_parameter< StringVector >::type trajId(trajIdSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type locX(locXSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type locY(locYSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type locZ(locZSEXP);
+    Rcpp::traits::input_parameter< double >::type radius(radiusSEXP);
+    Rcpp::traits::input_parameter< double >::type threshold(thresholdSEXP);
+    Rcpp::traits::input_parameter< String >::type timeunits(timeunitsSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    rcpp_result_gen = Rcpp::wrap(getRecursions3DCpp(trajX, trajY, trajZ, trajT, trajId, locX, locY, locZ, radius, threshold, timeunits, verbose));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_recurse_calculateCrossingPercentage", (DL_FUNC) &_recurse_calculateCrossingPercentage, 7},
     {"_recurse_getIsNewTrack", (DL_FUNC) &_recurse_getIsNewTrack, 1},
     {"_recurse_getRecursionsCpp", (DL_FUNC) &_recurse_getRecursionsCpp, 10},
+    {"_recurse_getRecursions3DCpp", (DL_FUNC) &_recurse_getRecursions3DCpp, 12},
     {NULL, NULL, 0}
 };
 

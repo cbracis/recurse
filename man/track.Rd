@@ -4,7 +4,9 @@
 \name{track}
 \alias{track}
 \title{Sample trajectory (track).}
-\format{A data frame with 100 rows and 4 columns}
+\format{
+A data frame with 100 rows and 4 columns
+}
 \usage{
 data(track)
 }

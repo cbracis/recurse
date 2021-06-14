@@ -13,3 +13,7 @@ getRecursionsCpp <- function(trajX, trajY, trajT, trajId, locX, locY, radius, th
     .Call('_recurse_getRecursionsCpp', PACKAGE = 'recurse', trajX, trajY, trajT, trajId, locX, locY, radius, threshold, timeunits, verbose)
 }
 
+getRecursions3DCpp <- function(trajX, trajY, trajZ, trajT, trajId, locX, locY, locZ, radius, threshold, timeunits, verbose) {
+    .Call('_recurse_getRecursions3DCpp', PACKAGE = 'recurse', trajX, trajY, trajZ, trajT, trajId, locX, locY, locZ, radius, threshold, timeunits, verbose)
+}
+

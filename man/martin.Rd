@@ -4,7 +4,9 @@
 \name{martin}
 \alias{martin}
 \title{Sample trajectory (martin).}
-\format{A data frame with 600 rows and 4 columns}
+\format{
+A data frame with 600 rows and 4 columns
+}
 \usage{
 data(martin)
 }

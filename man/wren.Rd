@@ -4,7 +4,9 @@
 \name{wren}
 \alias{wren}
 \title{Sample trajectory (wren).}
-\format{A data frame with 600 rows and 4 columns}
+\format{
+A data frame with 600 rows and 4 columns
+}
 \usage{
 data(wren)
 }
