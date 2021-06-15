@@ -1,7 +1,7 @@
 #' @describeIn getRecursions3D Get recursions for a data.frame object consisting of columns x, y, z, datetime, and id
 #' @method getRecursions3D data.frame
 #' @export
-getRecursions3D.data.frame = function(x, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = FALSE)
+getRecursions3D.data.frame = function(x, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 {
 	# ideas for large data sets:
 	# optionally specify locations
@@ -21,7 +21,7 @@ getRecursions3D.data.frame = function(x, radius, threshold = 0, timeunits = c("h
 	
 	if (verbose)
 	{
-		stop("Verbose mode not yet implemented, run with verbose = FALSE")
+		warning("Verbose mode not fully implemented, time calculations not correct")
 		class(results) = c("recurse3D", "recurse.verbose")
 		
 		dataTz = attr(x[,3], "tzone")

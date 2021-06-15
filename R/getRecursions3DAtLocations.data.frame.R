@@ -1,7 +1,7 @@
 #' @describeIn getRecursions3DAtLocations Get recursions at specified locations for a data.frame object
 #' @method getRecursions3DAtLocations data.frame
 #' @export
-getRecursions3DAtLocations.data.frame = function(x, locations, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = FALSE)
+getRecursions3DAtLocations.data.frame = function(x, locations, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 {
 	stopifnot(is.data.frame(x))
 	stopifnot(ncol(x) == 5)
@@ -18,7 +18,7 @@ getRecursions3DAtLocations.data.frame = function(x, locations, radius, threshold
 	
 	if (verbose)
 	{
-		stop("Verbose mode not yet implemented, run with verbose = FALSE")
+		warning("Verbose mode not fully implemented, time calculations not correct")
 		class(results) = c("recurse3D", "recurse.verbose")
 
 		dataTz = attr(x[,3], "tzone")

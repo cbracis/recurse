@@ -740,7 +740,7 @@ List getRecursions3DCpp(NumericVector trajX, NumericVector trajY, NumericVector 
 					statsId[statsIdx] = trajId[nTraj - 1]; // last one
 					statsX[statsIdx] = locX[i];
 					statsY[statsIdx] = locY[i];
-					statsZ[statsIdx] = locY[i];
+					statsZ[statsIdx] = locZ[i];
 					statsCoordIdx[statsIdx] = i + 1; // becase R vectors are 1-based
 					statsVisitIdx[statsIdx] = revisits[i];
 					statsEntranceTime[statsIdx] = radiusEntranceTime;
@@ -774,7 +774,7 @@ List getRecursions3DCpp(NumericVector trajX, NumericVector trajY, NumericVector 
 		DataFrame stats = DataFrame::create(_["id"] = wrap( statsId.begin(), statsId.begin() + statsIdx ),
                                       _["x"] = wrap( statsX.begin(), statsX.begin() + statsIdx ),
                                       _["y"] = wrap( statsY.begin(), statsY.begin() + statsIdx ),
-                                      _["z"] = wrap( statsY.begin(), statsY.begin() + statsIdx ),
+                                      _["z"] = wrap( statsZ.begin(), statsZ.begin() + statsIdx ),
                                       _["coordIdx"] = wrap( statsCoordIdx.begin(), statsCoordIdx.begin() + statsIdx ),
                                       _["visitIdx"] = wrap( statsVisitIdx.begin(), statsVisitIdx.begin() + statsIdx ),
                                       _["entranceTime"] = wrap( statsEntranceTime.begin(), statsEntranceTime.begin() + statsIdx ),
