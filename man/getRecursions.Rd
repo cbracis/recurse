@@ -92,13 +92,13 @@ data.frame or using a \link[move]{MoveStack} object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: Get recursions for a data.frame object consisting of columns x, y, datetime, and id
+\item \code{getRecursions(data.frame)}: Get recursions for a data.frame object consisting of columns x, y, datetime, and id
 
-\item \code{Move}: Get recursions for a \link[move]{Move-class} object
+\item \code{getRecursions(Move)}: Get recursions for a \link[move]{Move-class} object
 
-\item \code{MoveStack}: Get recursions for a \link[move]{MoveStack} object
+\item \code{getRecursions(MoveStack)}: Get recursions for a \link[move]{MoveStack} object
+
 }}
-
 \examples{
 data(martin)
 revisits = getRecursions(martin, radius = 1)

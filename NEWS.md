@@ -1,3 +1,10 @@
+## Changes in recurse version 1.2.0
+### Bug fixes
+- temporarily disable getRecursionsInPolygon() until it can be migrated from sp to sf
+
+### New features
+- add getRecursions3D() function to calculate revisits for trajectories in three dimensions
+
 ## Changes in recurse version 1.1.1
 ### Bug fixes
 - fix problem with deprecated C++, change from bind1st() to bind()

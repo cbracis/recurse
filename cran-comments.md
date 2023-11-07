@@ -1,11 +1,13 @@
 ## Test environments
-* local OS X install 3.6.1
+* local Ubuntu 20.04.6 LTS
 * win-builder, dev and release
 
 ## R CMD check results
 There were no ERRORs, WARNINGs. 
 
-1 NOTE: revisitation is spelled correctly
+NOTES: 
+* revisitation is correctly spelled
+* this is a resubmission of an archived package
 
 ## Downstream dependencies
 There are currently no downstream dependencies for this package

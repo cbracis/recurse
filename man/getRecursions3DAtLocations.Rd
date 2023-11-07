@@ -12,7 +12,7 @@ getRecursions3DAtLocations(
   radius,
   threshold = 0,
   timeunits = c("hours", "secs", "mins", "days"),
-  verbose = FALSE
+  verbose = TRUE
 )
 
 \method{getRecursions3DAtLocations}{data.frame}(
@@ -21,7 +21,7 @@ getRecursions3DAtLocations(
   radius,
   threshold = 0,
   timeunits = c("hours", "secs", "mins", "days"),
-  verbose = FALSE
+  verbose = TRUE
 )
 }
 \arguments{
@@ -80,9 +80,9 @@ data.frame.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: Get recursions at specified locations for a data.frame object
-}}
+\item \code{getRecursions3DAtLocations(data.frame)}: Get recursions at specified locations for a data.frame object
 
+}}
 \examples{
 data(martin)
 locations = data.frame(x = c(-10, 0, 20), y = c(5, 0, 0))

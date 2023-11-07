@@ -61,7 +61,7 @@
 #' @export
 #' @name getRecursions3DAtLocations
 #' 
-getRecursions3DAtLocations = function(x, locations, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = FALSE)
+getRecursions3DAtLocations = function(x, locations, radius, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 {
 	UseMethod('getRecursions3DAtLocations', x)
 }

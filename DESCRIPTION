@@ -2,18 +2,17 @@ Package: recurse
 Type: Package
 Title: Computes Revisitation Metrics for Trajectory Data
 Version: 1.2.0
-Date: 2021-06-12
+Date: 2023-11-07
 Authors@R: person("Chloe", "Bracis", role = c("aut", "cre"), email = "cbracis@uw.edu")
 Author: Chloe Bracis [aut, cre]
 Maintainer: Chloe Bracis <cbracis@uw.edu>
 Description: Computes revisitation metrics for trajectory data, such as the number of revisitations for each location as well as the time spent for that visit and the time since the previous visit. Also includes functions to plot data.
 License: MIT + file LICENSE
-SystemRequirements: C++11
 Imports: Rcpp (>= 0.12.7)
 LinkingTo: Rcpp
 Suggests:
-    testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown, sp, rgeos
+    testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown
 LazyData: true
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.2
 Encoding: UTF-8
 VignetteBuilder: knitr

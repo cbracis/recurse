@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // calculateCrossingPercentage
 double calculateCrossingPercentage(double Cx, double Cy, double Ax, double Ay, double Bx, double By, double R);
 RcppExport SEXP _recurse_calculateCrossingPercentage(SEXP CxSEXP, SEXP CySEXP, SEXP AxSEXP, SEXP AySEXP, SEXP BxSEXP, SEXP BySEXP, SEXP RSEXP) {

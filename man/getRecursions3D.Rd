@@ -19,7 +19,7 @@ getRecursions3D(
   radius,
   threshold = 0,
   timeunits = c("hours", "secs", "mins", "days"),
-  verbose = FALSE
+  verbose = TRUE
 )
 }
 \arguments{
@@ -74,9 +74,9 @@ data.frame.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: Get recursions for a data.frame object consisting of columns x, y, z, datetime, and id
-}}
+\item \code{getRecursions3D(data.frame)}: Get recursions for a data.frame object consisting of columns x, y, z, datetime, and id
 
+}}
 \examples{
 data(martin)
 revisits = getRecursions(martin, radius = 1)

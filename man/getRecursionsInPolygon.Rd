@@ -99,19 +99,19 @@ data.frame.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{Move}: Get recursions in polygon for a \link[move]{Move-class} trajectory
+\item \code{getRecursionsInPolygon(Move)}: Get recursions in polygon for a \link[move]{Move-class} trajectory
 
-\item \code{data.frame}: Get recursions inside a polygon for a trajectory data.frame object consisting of columns x, y, datetime, and id
+\item \code{getRecursionsInPolygon(data.frame)}: Get recursions inside a polygon for a trajectory data.frame object consisting of columns x, y, datetime, and id
 
-\item \code{MoveStack}: Get recursions in polygon for a \link[move]{MoveStack} trajectory
+\item \code{getRecursionsInPolygon(MoveStack)}: Get recursions in polygon for a \link[move]{MoveStack} trajectory
+
 }}
-
 \examples{
-data(track)
-poly = sp::SpatialPolygons( list(
-	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
-	 	))
-revisits = getRecursionsInPolygon(track, poly)
+#data(track)
+#poly = sp::SpatialPolygons( list(
+#	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
+#	 	))
+#revisits = getRecursionsInPolygon(track, poly)
 }
 \seealso{
 \code{\link{getRecursions}}

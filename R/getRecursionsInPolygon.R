@@ -53,11 +53,11 @@
 #' @seealso \code{\link{getRecursions}}
 #'
 #' @examples
-#' data(track)
-#' poly = sp::SpatialPolygons( list(
-#' 	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
-#' 	 	))
-#' revisits = getRecursionsInPolygon(track, poly)
+#' #data(track)
+#' #poly = sp::SpatialPolygons( list(
+#' #	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
+#' #	 	))
+#' #revisits = getRecursionsInPolygon(track, poly)
 
 #' @export
 #' @name getRecursionsInPolygon

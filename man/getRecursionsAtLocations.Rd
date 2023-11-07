@@ -101,13 +101,13 @@ data.frame or using a \link[move]{MoveStack} object.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{data.frame}: Get recursions at specified locations for a data.frame object
+\item \code{getRecursionsAtLocations(data.frame)}: Get recursions at specified locations for a data.frame object
 
-\item \code{Move}: Get recursions at specified locations for a \link[move]{Move-class} object
+\item \code{getRecursionsAtLocations(Move)}: Get recursions at specified locations for a \link[move]{Move-class} object
 
-\item \code{MoveStack}: Get recursions at specified locations for a \link[move]{MoveStack} object
+\item \code{getRecursionsAtLocations(MoveStack)}: Get recursions at specified locations for a \link[move]{MoveStack} object
+
 }}
-
 \examples{
 data(martin)
 locations = data.frame(x = c(-10, 0, 20), y = c(5, 0, 0))
