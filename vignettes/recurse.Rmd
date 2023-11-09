@@ -158,7 +158,7 @@ legend("topleft", pch = 15:17, legend = paste("cluster", 1:3), bty = "n")
 
 ## Polygons
 
-NOTE: Calculating recursions in polygons was previously supported utilizing the sp package. This functionality is being temporarily disabled until it can be reimplemented using the sf package. The following documentation refers to earlier versions of recurse.
+NOTE: Calculating recursions in polygons was previously supported utilizing the now archived rgeos package. This functionality is being temporarily disabled until it can be reimplemented. The following documentation refers to earlier versions of recurse.
 
 As an alternative to using circular zones around trajectory or other points, one can specify a polygon in which to calculate revisits and residence time. This could be useful if there was a specific landscape feature where the precise boundary is important, such as a protected area, land use type, or territory.
 

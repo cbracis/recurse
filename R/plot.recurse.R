@@ -74,21 +74,21 @@ plot.recurse = function(x, xyt, ..., col, alpha = 1, legendPos = NULL)
 	{
 		if (!requireNamespace("fields", quietly = TRUE)) 
 		{
-			stop("fields package needed for legend. Please install it.",
+			warning("fields package needed for legend. Please install it.",
 				 call. = FALSE)
-		}	
-		
-		if (length(legendPos) != 2 | !is.numeric(legendPos))
+		} else 
 		{
-			stop("legendPos should be a vector of length 2 of the x,y coordinates for the legend.")
+			if (length(legendPos) != 2 | !is.numeric(legendPos))
+			{
+				stop("legendPos should be a vector of length 2 of the x,y coordinates for the legend.")
+			}
+			
+			fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=min(x$revisits):max(x$revisits))
+			ucord = graphics::par()$usr
+			pin = graphics::par()$pin
+			xdelta = pin[2] / pin[1] * (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
+			graphics::text
 		}
-		
-		fields::colorbar.plot(legendPos[1], legendPos[2], col = col, strip=min(x$revisits):max(x$revisits))
-		ucord = graphics::par()$usr
-		pin = graphics::par()$pin
-		xdelta = pin[2] / pin[1] * (ucord[2] - ucord[1]) * 0.4 * 0.5 # 0.4 is default width of colorbar
-		graphics::text(x = c(legendPos[1] - xdelta, legendPos[1] + xdelta), y = rep(legendPos[2], 2),
-			 labels = c(min(x$revisits), max(x$revisits)), pos = 1, offset = 1)
 	}
 	
 }

@@ -17,10 +17,16 @@ createTimeVector = function(n, tz = "")
 
 createMoveObj = function(df)
 {
-	require(move)
-	moveObj = move(x = df$x, y = df$y, time = df$t,
-				 proj = CRS("+proj=aeqd"), animal = df$id) 
-	idData(moveObj) = df$id[1] # move ignores id, so set it directly
+	if (requireNamespace("move", quietly = TRUE)) 
+	{
+		moveObj = move::move(x = df$x, y = df$y, time = df$t,
+					 proj = sp::CRS("+proj=aeqd"), animal = df$id) 
+		move::idData(moveObj) = df$id[1] # move ignores id, so set it directly
+	}
+	else
+	{
+		moveObj = NULL
+	}
 	return(moveObj)
 }
 
@@ -144,12 +150,14 @@ test_that("threshold",
 
 test_that("move objects",
 		  {
-		  	movePts = createMoveObj(simplePts)
-		  	expect_equal( getRecursions(movePts, 1), getRecursions(simplePts,1) )
-		  	
-		  	moveStackPts = createMoveObj(twoTracks)
-		  	expect_equal( getRecursions(moveStackPts, 1), getRecursions(twoTracks,1) )
-		  	
+		  	if (requireNamespace("move", quietly = TRUE)) 
+		  	{
+			  	movePts = createMoveObj(simplePts)
+			  	expect_equal( getRecursions(movePts, 1), getRecursions(simplePts,1) )
+			  	
+			  	moveStackPts = createMoveObj(twoTracks)
+			  	expect_equal( getRecursions(moveStackPts, 1), getRecursions(twoTracks,1) )
+		  	}
 		  })
 
 test_that("timezone",

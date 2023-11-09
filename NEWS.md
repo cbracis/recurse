@@ -1,6 +1,6 @@
 ## Changes in recurse version 1.2.0
 ### Bug fixes
-- temporarily disable getRecursionsInPolygon() until it can be migrated from sp to sf
+- temporarily disable getRecursionsInPolygon() until it can be migrated due to removal of rgeos
 
 ### New features
 - add getRecursions3D() function to calculate revisits for trajectories in three dimensions

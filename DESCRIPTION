@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 Imports: Rcpp (>= 0.12.7)
 LinkingTo: Rcpp
 Suggests:
-    testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown
+    testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown, sp
 LazyData: true
 RoxygenNote: 7.2.2
 Encoding: UTF-8

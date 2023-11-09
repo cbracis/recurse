@@ -3,6 +3,6 @@
 #' @export
 getRecursionsInPolygon.data.frame = function(trajectory, polygon, threshold = 0, timeunits = c("hours", "secs", "mins", "days"), verbose = TRUE)
 {
-	stop("This method is temporarily unavailable until it can be converted from sp to sf.")
+	stop("This method is temporarily unavailable until it can be migrated due to removal of rgeos.")
 	
 }
