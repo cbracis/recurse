@@ -1,3 +1,7 @@
+## Changes in recurse version 1.3.0
+### Bug fixes
+- renable getRecursionsInPolygon() using sf
+
 ## Changes in recurse version 1.2.0
 ### Bug fixes
 - temporarily disable getRecursionsInPolygon() until it can be migrated due to removal of rgeos

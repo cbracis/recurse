@@ -14,38 +14,35 @@
 #' A geographic projection is not appropriate. The projection for the 
 #' polygon and the trajectory must be the same.
 #' 
-#' \strong{Polygon.} The polygon must be specified as a \link[sp]{SpatialPolygons} object. It should consist
-#' of a single polygon (rather than a list of multiple polygons). It should further be convex, though this
+#' \strong{Polygon.} The polygon must be specified as a \link[sf]{st_polygon} object. It should consist
+#' of a single polygon (i.e. \link[sf]{st_geometry_type} = POLYGON). It should further be convex, though this
 #' requirement is not enforced, calculations for non-convex polygons will not necessarily be accurate. It may
 #' be advantageous to simplify complex geometry in order to shorten the time to run. If it is necessary to use a
 #' non-convex polygon, one approach would be to split it into convex pieces that can be run one-by-one. However,
 #' some visits would then be double-counted and would need to be combined back together based on the
-#' entrance/exit times and sequence of trajectory locations.
+#' entrance/exit times and sequence of trajectory locations. Multiple polygons would need to be handled with multiple
+#' calls with the output then concatenated together.
 #' 
 #' Either single or multiple individuals are supported, but be aware that this function will be slow with
 #' large amounts of data (e.g. millions of points). Multiple individuals are handled via the \code{id} column of the 
 #' data.frame.
 #'
 #' @param trajectory A data frame with four columns (the x-coordinate, the y-coordinate, the datetime, and the animal id).
-#' @param polygon A \link[sp]{SpatialPolygons} object with a single convex polygon.
+#' @param polygon A \link[sf]{st_polygon} object with a single convex polygon.
 #' @param threshold A time difference (in units \code{timeunits}) to ignore excursions outside the radius. Defaults to 0.
 #' @param timeunits Character string specifying units to calculate time differences in for the time spans inside the radius and since the 
 #' visit in \code{revisitStats}. Defaults to hours.
 #' @param verbose \code{TRUE} to output complete information (can be large for large input data frames) or 
 #' \code{FALSE} to output basic information.
 #'
-#' @return A list with several components, \code{revisits} and \code{residenceTime}
-#' are vectors of the same length as the \code{trajectory} dataframe. \code{revisits} is the number of revisits for each 
-#' location, where 1 means that there were 
-#' no revisits, only the initial visit. \code{residenceTime} is the total time spent withing the radius. \code{radius}
-#' is the specified radius used for all the calculations. \code{timeunits} is the specified time units used to specify
-#' timespans.
+#' @return A list with several components. \code{revisits} is the number of revisits to the polygon. \code{residenceTime} is the total time 
+#' spent withing the polygon. \code{radius} is NA in the case of polygons. \code{timeunits} is the specified time units used to specify timespans.
 #' 
 #' When \code{verbose = TRUE}, additional information 
-#' is also returned, \code{dists} and \code{revisitStats}. Next, \code{dists} gives the distance matrix between
+#' is also returned in \code{revisitStats}. Next, \code{dists} gives the distance matrix between
 #' all locations. Finally, \code{revisitStats} gives further statistics on each visit. These are calculated 
 #' per location (i.e., no aggregation of nearby points is performed), and give the index and location
-#' of the point of the track at the center of the radius, the radius entrance and exit time of the track for that 
+#' of the point of the track at the center of the radius (NA and 1 in the case of polygons), the radius entrance and exit time of the track for that 
 #' visit, how much time was spent inside the radius, and how long since the last visit (\code{NA} for the first visit).
 #' 
 #' 
@@ -53,12 +50,10 @@
 #' @seealso \code{\link{getRecursions}}
 #'
 #' @examples
-#' #data(track)
-#' #poly = sp::SpatialPolygons( list(
-#' #	 	sp::Polygons( list(sp::Polygon(cbind(c(4,6,6,3,4),c(1,2,4,3,1)))), ID = 1 )
-#' #	 	))
-#' #revisits = getRecursionsInPolygon(track, poly)
-
+#' data(track)
+#' poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
+#' poly = sf::st_sfc(poly, crs = "EPSG:3410")
+#' revisits = getRecursionsInPolygon(track, poly)
 #' @export
 #' @name getRecursionsInPolygon
 #' 

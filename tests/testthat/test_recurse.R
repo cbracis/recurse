@@ -19,8 +19,8 @@ createMoveObj = function(df)
 {
 	if (requireNamespace("move", quietly = TRUE)) 
 	{
-		moveObj = move::move(x = df$x, y = df$y, time = df$t,
-					 proj = sp::CRS("+proj=aeqd"), animal = df$id) 
+		# remove projection in order to remove sp dependency (was proj = sp::CRS("+proj=aeqd"))
+		moveObj = move::move(x = df$x, y = df$y, time = df$t, animal = df$id) 
 		move::idData(moveObj) = df$id[1] # move ignores id, so set it directly
 	}
 	else
@@ -187,4 +187,14 @@ test_that("interval res time",
 		  	
 		  })
 
+test_that("polygon",
+		  {
+		  	require(sf)
+		  	poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
+		  	polyc = sf::st_sfc(poly, crs = "EPSG:4326")
+		  	recursions = getRecursionsInPolygon(track, polyc)
+		  	expect_equal(recursions$revisits, 2)
+		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[1]), digits = 2), 44.99)
+		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[2]), digits = 2), 108.9)
+		  })
 
