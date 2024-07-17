@@ -30,6 +30,19 @@ createMoveObj = function(df)
 	return(moveObj)
 }
 
+createMove2Obj = function(df)
+{
+  if (requireNamespace("move2", quietly = TRUE)) 
+  {
+    moveObj = move2::mt_as_move2(df, coords =c("x", "y"), time_column = "t", track_id_column = "id") 
+  }
+  else
+  {
+    moveObj = NULL
+  }
+  return(moveObj)
+}
+
 testTz = function(df)
 {
 	output = getRecursions(df, 1)
@@ -150,7 +163,13 @@ test_that("threshold",
 
 test_that("move objects",
 		  {
-		  	if (requireNamespace("move", quietly = TRUE)) 
+		    if (requireNamespace("move2", quietly = TRUE)) 
+		    {
+		      move2Pts = createMove2Obj(simplePts)
+		      expect_equal( getRecursions(move2Pts, 1), getRecursions(simplePts,1) )
+		    } 
+		    
+		    if (requireNamespace("move", quietly = TRUE)) 
 		  	{
 			  	movePts = createMoveObj(simplePts)
 			  	expect_equal( getRecursions(movePts, 1), getRecursions(simplePts,1) )
@@ -159,6 +178,18 @@ test_that("move objects",
 			  	expect_equal( getRecursions(moveStackPts, 1), getRecursions(twoTracks,1) )
 		  	}
 		  })
+
+test_that("move2 objects",
+          {
+            if (requireNamespace("move2", quietly = TRUE)) 
+            {
+              movePts = createMove2Obj(simplePts)
+              expect_equal( getRecursions(movePts, 1), getRecursions(simplePts,1) )
+              
+              moveStackPts = createMoveObj(twoTracks)
+              expect_equal( getRecursions(moveStackPts, 1), getRecursions(twoTracks,1) )
+            }
+          })
 
 test_that("timezone",
 		  {
@@ -196,5 +227,8 @@ test_that("polygon",
 		  	expect_equal(recursions$revisits, 2)
 		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[1]), digits = 2), 44.99)
 		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[2]), digits = 2), 108.9)
+		  	
+		  	recursions2 = getRecursionsInPolygon(createMove2Obj(track), polyc)
+		  	expect_equal(recursions2$revisits, 2)
 		  })
 

@@ -181,8 +181,10 @@ getRecursionsInPolygon.data.frame = function(trajectory, polygon, threshold = 0,
 	if (verbose)
 	{
 		#names(revisitStats) = statsColNames
-		revisitStats$timeSinceLastVisit = as.difftime(revisitStats$timeSinceLastVisit, units = timeunits) # becasue first is always NA, loses difftime class
-		
+	  if (nrow(revisitStats) > 1)
+	  {
+		  revisitStats$timeSinceLastVisit = as.difftime(revisitStats$timeSinceLastVisit, units = timeunits) # becasue first is always NA, loses difftime class
+	  }
 		results = c(results, list(revisitStats = revisitStats))
 		class(results) = c("recurse", "recurse.verbose")
 	}
