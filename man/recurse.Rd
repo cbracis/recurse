@@ -2,6 +2,7 @@
 % Please edit documentation in R/recurse.R
 \docType{package}
 \name{recurse}
+\alias{recurse-package}
 \alias{recurse}
 \title{Computes revisitation metrics for trajectory data}
 \description{

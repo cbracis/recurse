@@ -1,5 +1,4 @@
 ## Test environments
-* local Ubuntu 20.04.6 LTS
 * win-builder, dev and release
 
 ## R CMD check results

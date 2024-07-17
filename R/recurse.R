@@ -11,10 +11,9 @@
 #' @author Chloe Bracis <cbracis@uw.edu>
 #' 
 #' @name recurse
-#' @docType package
 #'@importFrom Rcpp evalCpp
 #'@useDynLib recurse
-NULL
+"_PACKAGE"
 
 #' Sample trajectory (track).
 #'

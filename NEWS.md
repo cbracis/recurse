@@ -1,3 +1,10 @@
+## Changes in recurse version 1.4.0
+### Bug fixes
+- fix bug in getRecursionsInPolygon() giving error for 0 or 1 revisits in polygon
+
+### New features
+- add support for move2 objects
+
 ## Changes in recurse version 1.3.0
 ### Bug fixes
 - renable getRecursionsInPolygon() using sf

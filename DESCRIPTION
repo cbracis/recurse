@@ -1,8 +1,8 @@
 Package: recurse
 Type: Package
 Title: Computes Revisitation Metrics for Trajectory Data
-Version: 1.3.0
-Date: 2024-02-18
+Version: 1.4.0
+Date: 2024-07-17
 Authors@R: person("Chloe", "Bracis", role = c("aut", "cre"), email = "cbracis@uw.edu")
 Author: Chloe Bracis [aut, cre]
 Maintainer: Chloe Bracis <cbracis@uw.edu>
@@ -10,9 +10,13 @@ Description: Computes revisitation metrics for trajectory data, such as the numb
 License: MIT + file LICENSE
 Imports: Rcpp (>= 0.12.7)
 LinkingTo: Rcpp
-Suggests:
-    testthat, circular, prevR, scales, fields, methods, move, knitr, rmarkdown, sf
+Suggests: testthat, circular, prevR, scales, fields, methods, move, move2,
+        knitr, rmarkdown, sf
 LazyData: true
-RoxygenNote: 7.2.2
+RoxygenNote: 7.3.1
 Encoding: UTF-8
 VignetteBuilder: knitr
+NeedsCompilation: yes
+Packaged: 2024-02-18 19:34:05 UTC; bracisc
+Repository: CRAN
+Date/Publication: 2024-02-18 20:00:02 UTC

@@ -17,9 +17,9 @@
 #' Either single or multiple individuals are supported, but be aware that this function will be slow with
 #' large amounts of data (e.g. millions of points), so consider pre-specifying the locations 
 #' (\code{\link{getRecursionsAtLocations}}) or use clustering. Multiple individuals are handled via the \code{id} column of the 
-#' data.frame or using a \link[move]{MoveStack} object.
+#' data.frame or using a move2 or \link[move]{MoveStack} object.
 #' 
-#' @param x Either a data frame, \link[move]{Move-class}, or \link[move]{MoveStack} object. For a data frame, 
+#' @param x Either a data frame, move2, \link[move]{Move-class}, or \link[move]{MoveStack} object. For a data frame, 
 #' the trajectory data with four columns (the x-coordinate, the y-coordinate, the datetime, and the animal id). 
 #' @param radius numeric radius to use in units of the (x,y) location data to detect recursions.
 #' @param threshold a time difference (in units \code{timeunits}) to ignore excursions outside the radius. Defaults to 0.

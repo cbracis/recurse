@@ -10,7 +10,7 @@
 #' the points inside and outside the polygon. Note the polygon must be convex as described in further detail below.
 #' 
 #' \strong{Projection.} Consider the projection used. Since segments are counted passing through the
-#' polygon, an equal area projection would ensure similar size comparisons (e.g., \link[move]{spTransform}). 
+#' polygon, an equal area projection would ensure similar size comparisons. 
 #' A geographic projection is not appropriate. The projection for the 
 #' polygon and the trajectory must be the same.
 #' 
@@ -27,7 +27,7 @@
 #' large amounts of data (e.g. millions of points). Multiple individuals are handled via the \code{id} column of the 
 #' data.frame.
 #'
-#' @param trajectory A data frame with four columns (the x-coordinate, the y-coordinate, the datetime, and the animal id).
+#' @param trajectory Either a data frame, move2, Move-class, or MoveStack object. For a data frame, the trajectory data with four columns (the x-coordinate, the y-coordinate, the datetime, and the animal id)
 #' @param polygon A \link[sf]{st_polygon} object with a single convex polygon.
 #' @param threshold A time difference (in units \code{timeunits}) to ignore excursions outside the radius. Defaults to 0.
 #' @param timeunits Character string specifying units to calculate time differences in for the time spans inside the radius and since the 
