@@ -115,10 +115,13 @@ data.frame.
 
 }}
 \examples{
-data(track)
-poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
-poly = sf::st_sfc(poly, crs = "EPSG:3410")
-revisits = getRecursionsInPolygon(track, poly)
+if (requireNamespace("sf")) 
+{
+    data(track)
+    poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
+    poly = sf::st_sfc(poly, crs = "EPSG:3410")
+    revisits = getRecursionsInPolygon(track, poly)
+}
 }
 \seealso{
 \code{\link{getRecursions}}

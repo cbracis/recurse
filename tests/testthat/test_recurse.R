@@ -115,9 +115,8 @@ test_that("time in radius",
 
 test_that("verbose",
 		  {
-		  	verbose = getRecursions(simplePts, 1, verbose = TRUE)
-		  	nonVerbose = getRecursions(simplePts, 1, verbose = FALSE)
-		  
+		  	expect_no_error(getRecursions(simplePts, 1, verbose = TRUE))
+		  	expect_no_error(getRecursions(simplePts, 1, verbose = FALSE))
 		  })
 
 test_that("revisit stats",
@@ -220,15 +219,17 @@ test_that("interval res time",
 
 test_that("polygon",
 		  {
-		  	require(sf)
-		  	poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
-		  	polyc = sf::st_sfc(poly, crs = "EPSG:4326")
-		  	recursions = getRecursionsInPolygon(track, polyc)
-		  	expect_equal(recursions$revisits, 2)
-		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[1]), digits = 2), 44.99)
-		  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[2]), digits = 2), 108.9)
-		  	
-		  	recursions2 = getRecursionsInPolygon(createMove2Obj(track), polyc)
-		  	expect_equal(recursions2$revisits, 2)
+		  	if (requireNamespace("sf", quietly = TRUE)) 
+		  	{
+			  	poly = sf::st_polygon(list(cbind(c(4,6,6,3,4), c(1,2,4,3,1))))
+			  	polyc = sf::st_sfc(poly, crs = "EPSG:4326")
+			  	recursions = getRecursionsInPolygon(track, polyc)
+			  	expect_equal(recursions$revisits, 2)
+			  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[1]), digits = 2), 44.99)
+			  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[2]), digits = 2), 108.9)
+			  	
+			  	recursions2 = getRecursionsInPolygon(createMove2Obj(track), polyc)
+			  	expect_equal(recursions2$revisits, 2)
+		  	}
 		  })
 
