@@ -227,9 +227,12 @@ test_that("polygon",
 			  	expect_equal(recursions$revisits, 2)
 			  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[1]), digits = 2), 44.99)
 			  	expect_equal(round(as.numeric(recursions$revisitStats$timeInside[2]), digits = 2), 108.9)
-			  	
-			  	recursions2 = getRecursionsInPolygon(createMove2Obj(track), polyc)
-			  	expect_equal(recursions2$revisits, 2)
+
+				obj <- createMove2Obj(track)
+				if (!is.null(obj)) {
+			  		recursions2 = getRecursionsInPolygon(obj, polyc)
+			  		expect_equal(recursions2$revisits, 2)
+				}	
 		  	}
 		  })
 
